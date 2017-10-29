@@ -64,4 +64,4 @@ class Action(BaseAction):
 main(program, Configuration, CLI, GUI)
 ```
 
-See [examples/example.py](example.py) for a functional starter template with specific requirements. Also see the other [examples](examples) and everything in the [docs](docs) folder.
+See [examples/example.py](examples/example.py) for a functional starter template with specific requirements. Also see the other [examples](examples) and everything in the [docs](docs) folder.
