@@ -4,7 +4,7 @@ Hydra is a framework for developing hybrid CLI/GUI programs in Python. It is a l
 
 ## Installation
 
-Download the latest wheel from the [release](../tree/master/release) folder and install with PIP:
+Download the latest wheel from the [release](release) folder and install with PIP:
 
 ```pip install hydra-0.1.0_alpha-py3-none-any.whl```
 
@@ -64,4 +64,4 @@ class Action(BaseAction):
 main(program, Configuration, CLI, GUI)
 ```
 
-See [examples/example.py](../tree/master/examples/example.py) for a functional starter template with specific requirements. Also see the other [examples](../tree/master/examples) and everything in the [docs](../tree/master/docs) folder.
+See [examples/example.py](example.py) for a functional starter template with specific requirements. Also see the other [examples](examples) and everything in the [docs](docs) folder.
