@@ -6,6 +6,7 @@ setup(
 	description="A framework for developing hybrid CLI/GUI programs.",
 	url="https://github.com/rweathers/hydra",
 	author="Ryan Weathers",
+	author_email="ryanweathers63@gmail.com",
 	license="GPLv3+",
 	classifiers=[
 		"Development Status :: 3 - Alpha",
