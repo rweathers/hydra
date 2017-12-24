@@ -208,7 +208,12 @@ class BaseCLI:
 		print("")
 		print(self.prog["name"], self.prog["version"])
 		print(self.prog["purpose"])
-		print("Usage:", self.prog["usage"])
+		
+		usage = self.prog["usage"].strip().split("\n")
+		prefix = "Usage:"
+		for u in usage:
+			print(prefix, u.strip())
+			prefix = "      "
 		
 		for (long, short, desc, type) in self.arguments:
 			desc = desc.replace("\n", "\n " + " " * width)
