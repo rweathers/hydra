@@ -11,14 +11,6 @@ _Paramaters_:
 * `processed` - Counter of processed items.
 * `total` - Total number of items to process.
 
-### hydra.localize_dir(path)
-
-Return the given path with directory separator characters converted to the local os character and with one appened to the end.
-
-### hydra.localize_file(filename)
-
-Return the given filename with directory separator characters converted to the local os character.
-
 ### hydra.setdefaults(primary, secondary)
 
 Return a dictionary with the values of primary and secondary merged, with primary taking precedence over secondary.

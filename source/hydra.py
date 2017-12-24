@@ -796,7 +796,7 @@ class BaseGUI(tk.Frame):
 		if widget.value.get() != "": initialdir = os.path.dirname(widget.value.get())
 		
 		result = tk.filedialog.askopenfilename(initialdir=initialdir, initialfile=initialfile, filetypes=filetypes)
-		if result: widget.setval(localize_file(result))
+		if result: widget.setval(result)
 		
 		# Hack for windows bug - if you double-click the second click is passed to the form, this sends the event to a disabled widget causing it to have no effect
 		self.disable_widgets()
@@ -817,7 +817,7 @@ class BaseGUI(tk.Frame):
 		if len(result) == 1:
 			result = result[0]
 		else:
-			result = map(lambda f: "\"" + localize_file(f).replace("\"", "\\\"") + "\"", result)
+			result = map(lambda f: "\"" + f.replace("\"", "\\\"") + "\"", result)
 			result = ",".join(result)
 		widget.setval(result)
 		
@@ -837,7 +837,7 @@ class BaseGUI(tk.Frame):
 		if widget.value.get() != "": initialdir = os.path.dirname(widget.value.get())
 		
 		result = tk.filedialog.asksaveasfilename(initialdir=initialdir, initialfile=initialfile, filetypes=filetypes)
-		if result: widget.setval(localize_file(result))
+		if result: widget.setval(result)
 	
 	def get_folder(self, widget, initialdir, ignored1=None, ignored2=None):
 		"""Show the open folder dialog.
@@ -851,7 +851,7 @@ class BaseGUI(tk.Frame):
 		if widget.value.get() != "": initialdir = widget.value.get()
 		
 		result = tk.filedialog.askdirectory(initialdir=initialdir)
-		if result: widget.setval(localize_dir(result))
+		if result: widget.setval(result)
 	
 	def center(self, window):
 		"""Center the given window.
@@ -1023,21 +1023,6 @@ def progress(last_update, text, started=None, processed=None, total=None):
 	else:
 		return None
 
-def localize_dir(path):
-	"""Return the given path with directory separator characters converted to the local os character and with one appened to the end."""
-	path = path.replace("/", os.sep)
-	path = path.replace("\\", os.sep)
-	if path[-1] != os.sep: path = path + os.sep
-	
-	return path
-
-def localize_file(filename):
-	"""Return the given filename with directory separator characters converted to the local os character."""
-	filename = filename.replace("/", os.sep)
-	filename = filename.replace("\\", os.sep)
-	
-	return filename
-	
 def setdefaults(primary, secondary):
 	"""Return a dictionary with the values of primary and secondary merged, with primary taking precedence over secondary.
 	
@@ -1074,7 +1059,8 @@ def main(prog, configuration_class, cli_class, gui_class):
 		cli_class - A BaseCI subclass.
 		gui_class - A BaseGUI subclass.
 	"""
-	path = localize_dir(os.path.dirname(sys.executable) if hasattr(sys, "frozen") else sys.path[0])
+	path = os.path.dirname(sys.executable) if hasattr(sys, "frozen") else sys.path[0]
+	path += os.sep
 	if prog["config"]    is not None: prog["config"]    = prog["config"].format(path=path)
 	if prog["error"]     is not None: prog["error"]     = prog["error"].format(path=path)
 	if prog["icon-file"] is not None: prog["icon-file"] = prog["icon-file"].format(path=path)
