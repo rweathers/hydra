@@ -18,7 +18,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-# Version: 0.1.0-alpha (2017-10-08)
+# Version: 0.1.2-alpha (2017-12-24)
 ################################################################################
 
 import csv
