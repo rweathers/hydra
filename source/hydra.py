@@ -111,7 +111,7 @@ class BaseCLI:
 		Paramaters:
 			argv - Command line arguments (sys.argv).
 		"""
-		flags = {}
+		flags = self.conf
 		map = {}
 		count = 0
 		
