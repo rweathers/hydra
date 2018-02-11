@@ -39,16 +39,18 @@ class BaseConfiguration:
 	
 	Attributes:
 		filename - Path to a configuration file.
+		prog - Program constants dictionary.
 		conf - Dictionary storing the option/value pairs. 
 	"""
 	
-	def __init__(self, filename):
+	def __init__(self, prog):
 		"""Initalize the object.
 		
 		Paramaters:
-			filename - Path to a configuration file.
+			prog - Program constants dictionary.
 		"""
-		self.filename = filename
+		self.prog = prog
+		self.filename = prog["config"]
 		self.conf = {}
 		
 		if self.filename is not None:
@@ -1073,7 +1075,7 @@ def main(prog, configuration_class, cli_class, gui_class):
 	try:
 		if ("gui" not in sys.argv) and ((len(sys.argv) > 1) or ((sys.stdin is not None) and not sys.stdin.isatty())):
 			try:
-				conf = configuration_class(prog["config"])
+				conf = configuration_class(prog)
 				cli = cli_class(prog, conf.conf, sys.argv)
 			except Exception as e:
 				print("ERROR: " + str(e))
@@ -1081,7 +1083,7 @@ def main(prog, configuration_class, cli_class, gui_class):
 		else:
 			root = tk.Tk()
 			try:
-				conf = configuration_class(prog["config"])
+				conf = configuration_class(prog)
 				gui = gui_class(root, prog, conf.conf)
 			except Exception as e:
 				root.withdraw()

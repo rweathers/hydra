@@ -5,17 +5,18 @@ Base class for loading and validating configuration files.
 ## Attributes
 
 * `filename` - Path to a configuration file.
+* `prog` - Program constants dictionary.
 * `conf` - Dictionary storing the option/value pairs. 
 
 ## Functions
 
-### BaseConfiguration(filename)
+### BaseConfiguration(prog)
 
 Initialize the object.
 
 _Paramaters_:
 
-* `filename` - Path to a configuration file.
+* `prog` - Program constants dictionary.
 
 ### load()
 
