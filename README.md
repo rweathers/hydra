@@ -34,17 +34,20 @@ class Configuration(BaseConfiguration):
 class CLI(BaseCLI):
 	def define_arguments(self):
 		# Define the command line arguments.
-	
+
+	def define_usage(self):
+		# Define the command line usage.
+
 	def get_action(self, inputs):
 		return Action
 
 class GUI(BaseGUI):
 	def define_menu(self):
 		# Define the menu.
-	
+
 	def define_help(self, help):
 		# Define the help information.
-	
+
 	def create_widgets(self):
 		# Create the widgets.
 
@@ -54,10 +57,10 @@ class GUI(BaseGUI):
 class Action(BaseAction):
 	def standarize(self):
 		# Standardize the user's inputs.
-	
+
 	def validate(self):
 		# Raise an exception if any of the user's inputs are invalid.
-	
+
 	def action(self):
 		# Perform the task and return a message for the user.
 

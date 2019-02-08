@@ -7,6 +7,7 @@ Base class for defining the command line interface.
 * `prog` - Program constants dictionary.
 * `conf` - Configuration dictionary.
 * `arguments` - Command line arguments (sys.argv).
+* `usage` - Command line usage.
 * `last_update` - Unix timestamp of last user progress update.
 * `inputs` - User input dictionary.
 
@@ -25,6 +26,10 @@ _Paramaters_:
 ### define_arguments()
 
 Define the command line arguments.
+
+### define_usage()
+
+Define the command line usage.
 
 ### parse_arguments(argv)
 

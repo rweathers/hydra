@@ -5,12 +5,11 @@ from hydra import *
 
 program = {
 	"name"     :"Hydra Example #2",
-	"version"  :"0.1.0",
-	"date"     :"10/08/2017",
-	"usage"    :"example2.py [-options] --action action# --value# value",
+	"version"  :"0.2.0",
+	"date"     :"02/08/2019",
 	"purpose"  :"Demonstrates tabs and multiple actions.",
 	"url"      :"https://github.com/rweathers/hydra",
-	"copyright":"Copyright © 2017 Ryan Weathers, All Rights Reserved.",
+	"copyright":"Copyright © 2017, 2018, 2019 Ryan Weathers, All Rights Reserved.",
 	"license"  :"This program is free software: you can redistribute it and/or modify\nit under the terms of the GNU General Public License as published by\nthe Free Software Foundation, either version 3 of the License, or\n(at your option) any later version.\n\nThis program is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of\nMERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\nGNU General Public License for more details.\n\nYou should have received a copy of the GNU General Public License\nalong with this program.  If not, see <http://www.gnu.org/licenses/>.", # None for no license
 	"config"   :None,
 	"error"    :None,
@@ -34,6 +33,9 @@ class CLI(BaseCLI):
 			("value2"  , "2", "Value #2"                           , "value"),
 			("value3"  , "3", "Value #3"                           , "value")
 		]
+	
+	def define_usage(self):
+		self.usage = "example2 [-options] --action action# --value# value"
 	
 	def get_action(self, inputs):
 		if inputs["action"] == "action1":

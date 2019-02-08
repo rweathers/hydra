@@ -8,7 +8,6 @@ program = {
 	"name"     :"Program Name",
 	"version"  :"0.0.0",
 	"date"     :"MM/DD/YYYY",
-	"usage"    :"example [-options] --greeting Greeting --name Name", # Separate multiple commands with \n
 	"purpose"  :"Purpose of the program.",
 	"url"      :"http://www.your-website.com/", # None for no url
 	"copyright":"Copyright © YYYY Your Name, All Rights Reserved.",
@@ -55,6 +54,10 @@ class CLI(BaseCLI):
 		]
 		
 		# Flags used: g, h, l, n, q, v, V
+	
+	def define_usage(self):
+		# TODO - define your usage, separate multiple commands with \n
+		self.usage = "example [-options] --greeting Greeting --name Name"
 	
 	def get_action(self, inputs):
 		# TODO - return the BaseAction subclass to use

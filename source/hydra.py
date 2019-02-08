@@ -81,6 +81,7 @@ class BaseCLI:
 		prog - Program constants dictionary.
 		conf - Configuration dictionary.
 		arguments - Command line arguments (sys.argv).
+		usage - Commandl line usage.
 		last_update - Unix timestamp of last user progress update.
 		inputs - User input dictionary.
 	"""
@@ -96,15 +97,21 @@ class BaseCLI:
 		self.prog = prog
 		self.conf = conf
 		self.arguments = []
+		self.usage = ""
 		self.last_update = 0
 		
 		self.define_arguments()
+		self.define_usage()
 		self.inputs = self.parse_arguments(argv, conf)
 		
 		self.action()
 	
 	def define_arguments(self):
 		"""Define the command line arguments."""
+		pass
+		
+	def define_usage(self):
+		"""Define the command line usage."""
 		pass
 	
 	def parse_arguments(self, argv, defaults):
@@ -211,7 +218,11 @@ class BaseCLI:
 		print(self.prog["name"], self.prog["version"])
 		print(self.prog["purpose"])
 		
-		usage = self.prog["usage"].strip().split("\n")
+		# Backwards Compatibility
+		if ("usage" in self.prog) and (self.usage == ""): self.usage = self.prog["usage"]
+		# END Backwards Compatibility
+		
+		usage = self.usage.strip().split("\n")
 		prefix = "Usage:"
 		for u in usage:
 			print(prefix, u.strip())
@@ -1073,6 +1084,10 @@ def main(prog, configuration_class, cli_class, gui_class):
 	if prog["config"]    is not None: prog["config"]    = prog["config"].format(path=path)
 	if prog["error"]     is not None: prog["error"]     = prog["error"].format(path=path)
 	if prog["icon-file"] is not None: prog["icon-file"] = prog["icon-file"].format(path=path)
+	
+	# Deprecation warnings
+	if "usage" in prog: print("Deprecation Warning: program[\"usage\"] has been deprecated. Use BaseCLI.define_usage instead.")
+	# END Deprecation warnings
 	
 	try:
 		if ("gui" not in sys.argv) and ((len(sys.argv) > 1) or ((sys.stdin is not None) and not sys.stdin.isatty())):
