@@ -16,6 +16,42 @@ program = {
 	"error"    :"{path}example.err" # None for no error file
 }
 
+class Action(BaseAction):
+	def standardize(self):
+		# TODO - standardize your inputs
+		
+		# self.expand("name") will standardize a single filename or a glob into a list of full filenames
+		
+		pass
+	
+	def validate(self):
+		errors = ""
+		
+		# TODO - validate your inputs
+		
+		if self.inputs["greeting"] == "": errors += "Greeting required\n"
+		if self.inputs["name"]     == "": errors += "Name required\n"
+		
+		if errors != "": raise Exception(errors)
+	
+	def action(self):
+		# TODO - perform the task
+		
+		# self.open(filename, mode=?, encoding=?) will allow you to use "STDIN" and "STDOUT" for sys.stdin and sys.stdout, respectively
+		
+		# Dummy code to demonstrate progress
+		self.progress("Starting...")
+		started = time.time()
+		i = 0
+		z = 10
+		while i < z:
+			time.sleep(0.5)
+			
+			i += 1
+			self.progress("Record: " + str(i), started, i, z)
+		
+		return self.inputs["greeting"] + " " + self.inputs["name"] + "!"
+
 class Configuration(BaseConfiguration):
 	def validate(self):
 		errors = ""
@@ -115,41 +151,5 @@ class GUI(BaseGUI):
 	def get_action(self, inputs):
 		# TODO - return the BaseAction subclass to use
 		return Action
-
-class Action(BaseAction):
-	def standardize(self):
-		# TODO - standardize your inputs
-		
-		# self.expand("name") will standardize a single filename or a glob into a list of full filenames
-		
-		pass
-	
-	def validate(self):
-		errors = ""
-		
-		# TODO - validate your inputs
-		
-		if self.inputs["greeting"] == "": errors += "Greeting required\n"
-		if self.inputs["name"]     == "": errors += "Name required\n"
-		
-		if errors != "": raise Exception(errors)
-	
-	def action(self):
-		# TODO - perform the task
-		
-		# self.open(filename, mode=?, encoding=?) will allow you to use "STDIN" and "STDOUT" for sys.stdin and sys.stdout, respectively
-		
-		# Dummy code to demonstrate progress
-		self.progress("Starting...")
-		started = time.time()
-		i = 0
-		z = 10
-		while i < z:
-			time.sleep(0.5)
-			
-			i += 1
-			self.progress("Record: " + str(i), started, i, z)
-		
-		return self.inputs["greeting"] + " " + self.inputs["name"] + "!"
 
 if __name__ == "__main__": main(program, Configuration, CLI, GUI)

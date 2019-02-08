@@ -15,6 +15,27 @@ program = {
 	"error"    :None
 }
 
+class Action1(BaseAction):
+	def validate(self):
+		if self.inputs["value1"] == "": raise Exception("Value 1 required")
+	
+	def action(self):
+		return "Action 1 Completed Successfully"
+		
+class Action2(BaseAction):
+	def validate(self):
+		if self.inputs["value2"] == "": raise Exception("Value 2 required")
+	
+	def action(self):
+		return "Action 2 Completed Successfully"
+		
+class Action3(BaseAction):
+	def validate(self):
+		if self.inputs["value3"] == "": raise Exception("Value 3 required")
+	
+	def action(self):
+		return "Action 3 Completed Successfully"
+
 class Configuration(BaseConfiguration):
 	pass
 
@@ -70,26 +91,5 @@ class GUI(BaseGUI):
 			return Action3
 		else:
 			raise Exception("An unknown error has occured")
-
-class Action1(BaseAction):
-	def validate(self):
-		if self.inputs["value1"] == "": raise Exception("Value 1 required")
-	
-	def action(self):
-		return "Action 1 Completed Successfully"
-		
-class Action2(BaseAction):
-	def validate(self):
-		if self.inputs["value2"] == "": raise Exception("Value 2 required")
-	
-	def action(self):
-		return "Action 2 Completed Successfully"
-		
-class Action3(BaseAction):
-	def validate(self):
-		if self.inputs["value3"] == "": raise Exception("Value 3 required")
-	
-	def action(self):
-		return "Action 3 Completed Successfully"
 
 if __name__ == "__main__": main(program, Configuration, CLI, GUI)

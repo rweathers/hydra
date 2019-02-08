@@ -6,17 +6,17 @@ Hydra is a framework for developing hybrid CLI/GUI programs in Python. It is a l
 
 Download the latest wheel from the [release](release) folder and install with PIP:
 
-```pip install hydra-0.1.3_alpha-py3-none-any.whl```
+```pip install hydra-0.2.0_alpha-py3-none-any.whl```
 
 ## Usage
 
 To use Hydra, you must define:
 
 * A program constants dictionary
+* At least one subclass of `BaseAction`
 * A subclass of `BaseConfiguration`
 * A subclass of `BaseCLI`
 * A subclass of `BaseGUI`
-* At least one subclass of `BaseAction`
 
 Then call the `main()` function. See below for a minimal layout.
 
@@ -26,6 +26,16 @@ from hydra import *
 program = {
 	# Define program constants
 }
+
+class Action(BaseAction):
+	def standarize(self):
+		# Standardize the user's inputs.
+
+	def validate(self):
+		# Raise an exception if any of the user's inputs are invalid.
+
+	def action(self):
+		# Perform the task and return a message for the user.
 
 class Configuration(BaseConfiguration):
 	def validate(self):
@@ -56,16 +66,6 @@ class GUI(BaseGUI):
 
 	def get_action(self, inputs):
 		return Action
-
-class Action(BaseAction):
-	def standarize(self):
-		# Standardize the user's inputs.
-
-	def validate(self):
-		# Raise an exception if any of the user's inputs are invalid.
-
-	def action(self):
-		# Perform the task and return a message for the user.
 
 if __name__ == "__main__": main(program, Configuration, CLI, GUI)
 ```

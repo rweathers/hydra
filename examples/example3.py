@@ -15,6 +15,10 @@ program = {
 	"error"    :None
 }
 
+class Action(BaseAction):
+	def action(self):
+		return "Completed Successfully"
+
 class Configuration(BaseConfiguration):
 	pass
 
@@ -36,9 +40,5 @@ class GUI(BaseGUI):
 
 	def get_action(self, inputs):
 		return Action
-
-class Action(BaseAction):
-	def action(self):
-		return "Completed Successfully"
 
 if __name__ == "__main__": main(program, Configuration, CLI, GUI)

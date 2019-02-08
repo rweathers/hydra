@@ -17,3 +17,11 @@ Added support for multiple usage commands, separated by \n.
 Fixed CLI to pass all config values to actions.
 
 Added program constants dictionary to BaseConfiguration.
+
+## 0.2.0-alpha (2019-02-08)
+
+Added BaseAction.execute.
+
+Added BaseCLI.create_usage and deprecated program["usage"]
+
+Added BaseGUI.create_icon and deprecated program["icon-*"]
