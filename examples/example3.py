@@ -44,4 +44,4 @@ class Action(BaseAction):
 	def action(self):
 		return "Completed Successfully"
 
-main(program, Configuration, CLI, GUI)
+if __name__ == "__main__": main(program, Configuration, CLI, GUI)

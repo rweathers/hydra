@@ -152,4 +152,4 @@ class Action(BaseAction):
 		
 		return self.inputs["greeting"] + " " + self.inputs["name"] + "!"
 
-main(program, Configuration, CLI, GUI)
+if __name__ == "__main__": main(program, Configuration, CLI, GUI)

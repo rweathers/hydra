@@ -92,4 +92,4 @@ class Action3(BaseAction):
 	def action(self):
 		return "Action 3 Completed Successfully"
 
-main(program, Configuration, CLI, GUI)
+if __name__ == "__main__": main(program, Configuration, CLI, GUI)

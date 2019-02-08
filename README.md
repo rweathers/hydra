@@ -61,7 +61,7 @@ class Action(BaseAction):
 	def action(self):
 		# Perform the task and return a message for the user.
 
-main(program, Configuration, CLI, GUI)
+if __name__ == "__main__": main(program, Configuration, CLI, GUI)
 ```
 
 See [examples/example.py](examples/example.py) for a functional starter template with specific requirements. Also see the other [examples](examples) and everything in the [docs](docs) folder.
