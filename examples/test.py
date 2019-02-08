@@ -9,9 +9,7 @@ def test1():
 	inputs = {"greeting":"Hello", "name":"World"}
 	
 	action = Action(inputs, output_progress)
-	action.standardize()
-	action.validate()
-	message = action.action()
+	message = action.execute()
 	output_progress("")
 	
 	if message != "Hello World!":

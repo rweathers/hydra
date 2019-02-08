@@ -30,6 +30,10 @@ Raise an exception if any of the user's inputs are invalid.
 
 Perform the task and return a message for the user.
 
+### execute()
+
+Call standardize, validate and action. Return the result from action.
+
 ### expand(field)
 
 Convert a CSV string into a list of filenames and expand wildcard filenames.

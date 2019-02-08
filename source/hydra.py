@@ -292,9 +292,7 @@ class BaseCLI:
 				if not self.inputs["quiet"]: print("")
 				
 				action = self.get_action(self.inputs)(self.inputs, self.output_progress)
-				action.standardize()
-				action.validate()
-				message = action.action()
+				message = action.execute()
 				
 				if not self.inputs["quiet"]:
 					self.output_progress("")
@@ -927,9 +925,7 @@ class BaseGUI(tk.Frame):
 			for name in self.widgets: inputs[name] = self.widgets[name].getval()
 			
 			action = self.get_action(inputs)(inputs, self.set_progress)
-			action.standardize()
-			action.validate()
-			message = action.action()
+			message = action.execute()
 			
 			self.config(cursor="")
 			tk.messagebox.showinfo("Success", message)
@@ -973,6 +969,12 @@ class BaseAction:
 	def action(self):
 		"""Perform the task and return a message for the user."""
 		return ""
+	
+	def execute(self):
+		"""Call standardize, validate and action. Return the result from action."""
+		self.standardize()
+		self.validate()
+		return self.action()
 	
 	def expand(self, field):
 		"""Convert a CSV string into a list of filenames and expand wildcard filenames.
