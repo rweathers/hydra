@@ -13,16 +13,7 @@ program = {
 	"copyright":"Copyright © YYYY Your Name, All Rights Reserved.",
 	"license"  :"This program is free software: you can redistribute it and/or modify\nit under the terms of the GNU General Public License as published by\nthe Free Software Foundation, either version 3 of the License, or\n(at your option) any later version.\n\nThis program is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of\nMERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\nGNU General Public License for more details.\n\nYou should have received a copy of the GNU General Public License\nalong with this program.  If not, see <http://www.gnu.org/licenses/>.", # None for no license
 	"config"   :"{path}example.ini", # None for no config file
-	"error"    :"{path}example.err", # None for no error file
-	
-	# icon-data holds a base64 encoded copy of the icon file, i.e.:
-	#	import base64
-	#	with open("example.png", "rb") as f: print(base64.b64encode(f.read()))
-	# icon-file holds the icon file name
-	# icon-data takes precedence over icon-file if icon-data is not None
-	# If both are None the default Tk icon will be used
-	"icon-data":None, # "base 64 string" for an embeded image
-	"icon-file":None # "{path}example.png" for an external image
+	"error"    :"{path}example.err" # None for no error file
 }
 
 class Configuration(BaseConfiguration):
@@ -64,6 +55,12 @@ class CLI(BaseCLI):
 		return Action
 
 class GUI(BaseGUI):
+	def define_icon(self):
+		# TODO - define your icon as a base-64 encoded string, i.e.:
+		#	import base64
+		#	with open("example.png", "rb") as f: print(base64.b64encode(f.read()))
+		self.icon = None
+		
 	def define_menu(self):
 		# TODO - define your menu. This is optional. Don't override define_menu() to have no menu.
 		self.menu = [

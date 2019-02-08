@@ -323,6 +323,7 @@ class BaseGUI(tk.Frame):
 	Attributes:
 		prog - Program constants dictionary.
 		conf - Configuration dictionary.
+		icon - Base-64 encoded string representing the icon.
 		menu - List of tuples defining the menu.
 		help - List of dictionaries defining the help.
 		widgets - Dictionary of the widget objects.
@@ -345,6 +346,7 @@ class BaseGUI(tk.Frame):
 		
 		self.prog = prog
 		self.conf = conf
+		self.icon = None
 		self.menu = []
 		self.help = []
 		self.widgets = {}
@@ -353,6 +355,7 @@ class BaseGUI(tk.Frame):
 		self.text_width = 40
 		self.last_update = 0
 		
+		self.define_icon()
 		self.define_menu()
 		self.create_menu()
 		
@@ -362,6 +365,10 @@ class BaseGUI(tk.Frame):
 		self.set_defaults()
 		
 		self.start()
+	
+	def define_icon(self):
+		"""Define the icon."""
+		pass
 	
 	def define_menu(self):
 		"""Define the menu."""
@@ -889,12 +896,17 @@ class BaseGUI(tk.Frame):
 		Paramaters:
 			window - TK frame.
 		"""
-		if self.prog["icon-data"] is not None:
+		if self.icon is not None:
+			img = tk.PhotoImage(data=self.icon)
+			window.tk.call("wm", "iconphoto", window._w, img)
+		# Backward compatiblity
+		elif ("icon-data" in self.prog) and (self.prog["icon-data"] is not None):
 			img = tk.PhotoImage(data=self.prog["icon-data"])
 			window.tk.call("wm", "iconphoto", window._w, img)
-		elif self.prog["icon-file"] is not None:
+		elif ("icon-file" in self.prog) and (self.prog["icon-file"] is not None):
 			img = tk.PhotoImage(file=self.prog["icon-file"])
 			window.tk.call("wm", "iconphoto", window._w, img)
+		# END Backward compatiblity
 	
 	def start(self):
 		"""Start the GUI."""
@@ -1081,12 +1093,16 @@ def main(prog, configuration_class, cli_class, gui_class):
 	"""
 	path = os.path.dirname(sys.executable) if hasattr(sys, "frozen") else sys.path[0]
 	path += os.sep
-	if prog["config"]    is not None: prog["config"]    = prog["config"].format(path=path)
-	if prog["error"]     is not None: prog["error"]     = prog["error"].format(path=path)
-	if prog["icon-file"] is not None: prog["icon-file"] = prog["icon-file"].format(path=path)
+	if prog["config"] is not None: prog["config"] = prog["config"].format(path=path)
+	if prog["error"]  is not None: prog["error"]  = prog["error"].format(path=path)
+	
+	# Backwards compatiblity
+	if ("icon-data" in prog) and (prog["icon-file"] is not None): prog["icon-file"] = prog["icon-file"].format(path=path)
+	# END Backwards compatiblity
 	
 	# Deprecation warnings
 	if "usage" in prog: print("Deprecation Warning: program[\"usage\"] has been deprecated. Use BaseCLI.define_usage instead.")
+	if ("icon-data" in prog) or ("icon-file" in prog): print("Deprecation Warning: program[\"icon-*\"] has been deprecated. Use BaseGUI.define_icon instead.")
 	# END Deprecation warnings
 	
 	try:

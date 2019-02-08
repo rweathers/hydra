@@ -42,6 +42,9 @@ class CLI(BaseCLI):
 		return Action
 
 class GUI(BaseGUI):
+	def define_icon(self):
+		# Define the icon.
+
 	def define_menu(self):
 		# Define the menu.
 
