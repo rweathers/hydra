@@ -14,7 +14,7 @@ Base class for loading and validating configuration files.
 
 Initialize the object.
 
-_Paramaters_:
+_Parameters_:
 
 * `prog` - Program constants dictionary.
 

@@ -17,7 +17,7 @@ Base class for defining the command line interface.
 
 Initialize the object.
 
-_Paramaters_:
+_Parameters_:
 
 * `prog` - Program constants dictionary.
 * `conf` - Configuration dictionary.
@@ -35,7 +35,7 @@ Define the command line usage.
 
 Parse the command line arguments and return them in a dictionary.
 
-_Paramaters_:
+_Parameters_:
 
 * `argv` - Command line arguments (sys.argv).
 
@@ -55,7 +55,7 @@ Print the program's license information.
 
 Print progress information to standard out.
 
-_Paramaters_:
+_Parameters_:
 
 * `text` - Progress text.
 * `started` - Unix timestamp of when the program started.
@@ -66,7 +66,7 @@ _Paramaters_:
 
 Return the BaseAction subclass to use.
 
-_Paramaters_:
+_Parameters_:
 
 * `inputs` - User input dictionary.
 

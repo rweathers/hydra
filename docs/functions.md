@@ -4,7 +4,7 @@
 
 Return progress text with optional time elapsed and estimated time to complete.
 
-_Paramaters_:
+_Parameters_:
 
 * `text` - Progress text.
 * `started` - Unix timestamp of when the program started.
@@ -15,7 +15,7 @@ _Paramaters_:
 
 Return a dictionary with the values of primary and secondary merged, with primary taking precedence over secondary.
 
-_Paramaters_:
+_Parameters_:
 
 * `primary` - The primary dictionary.
 * `secondary` - The secondary dictionary.
@@ -24,7 +24,7 @@ _Paramaters_:
 
 Write error details to a file.
 
-_Paramaters_:
+_Parameters_:
 
 * `ex` - An exception object.
 * `error_path` - Error filename.
@@ -33,7 +33,7 @@ _Paramaters_:
 
 Run the program.
 
-_Paramaters_:
+_Parameters_:
 
 * `prog` - Program constants dictionary.
 * `configuration_class` - A BaseConfiguration subclass.

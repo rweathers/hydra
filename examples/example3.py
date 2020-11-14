@@ -28,8 +28,8 @@ class CLI(BaseCLI):
 
 class GUI(BaseGUI):
 	def create_widgets(self):
-		# The create_widget functions have largs and wargs paramaters that are passed to the label and widget constructors, respectively
-		# They also have lgrid and wgrid paramaters that are passed to their respective grid() function calls
+		# The create_widget functions have largs and wargs parameters that are passed to the label and widget constructors, respectively
+		# They also have lgrid and wgrid parameters that are passed to their respective grid() function calls
 		# create_browse and create_button have bargs and bgrid that serve the same purpose
 		# These can be used to fully customize the widget layout
 		

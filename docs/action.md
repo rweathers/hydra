@@ -13,7 +13,7 @@ Base class for defining actions.
 
 Initialize the object.
 
-_Paramaters_:
+_Parameters_:
 
 * `inputs` - User input dictionary.
 * `progress` - Callback function for user progress updates.
@@ -38,7 +38,7 @@ Call standardize, validate and action. Return the result from action.
 
 Convert a CSV string into a list of filenames and expand wildcard filenames.
 
-_Paramaters_:
+_Parameters_:
 
 * `field` - Field name to modify.
 
@@ -46,7 +46,7 @@ _Paramaters_:
 
 Return sys.stdin (for filename == "STDIN"), sys.stdout (for filename == "STDIN") or a file handle.
 
-_Paramaters_:
+_Parameters_:
 
 * `filename` - "STDIN", "STDOUT" or a filename.
 * `mode` - File open mode.

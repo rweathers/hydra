@@ -21,7 +21,7 @@ Base class for defining the graphical user interface.
 
 Initialize the object.
 
-_Paramaters_:
+_Parameters_:
 
 * `master` - Tk Root object.
 * `prog` - Program constants dictionary.
@@ -47,7 +47,7 @@ Open the configuration file.
 
 Define the help information.
 
-_Paramaters_:
+_Parameters_:
 
 * `help` - A tk Text object.
 
@@ -67,7 +67,7 @@ Create the widgets.
 
 Add a title label to the root window.
 
-_Paramaters_:
+_Parameters_:
 
 * `text` - Title text.
 
@@ -75,7 +75,7 @@ _Paramaters_:
 
 Add an entry to the given parent.
 
-_Paramaters_:
+_Parameters_:
 
 * `parent` - A Tk frame.
 * `name` - Name of the widget.
@@ -91,7 +91,7 @@ _Paramaters_:
 
 Add a file browser to the given parent.
 
-_Paramaters_:
+_Parameters_:
 
 * `parent` - A Tk frame.
 * `name` - Name of the widget.
@@ -112,7 +112,7 @@ _Paramaters_:
 
 Add a combobox to the given parent.
 
-_Paramaters_:
+_Parameters_:
 
 * `parent` - A Tk frame.
 * `name` - Name of the widget.
@@ -129,7 +129,7 @@ _Paramaters_:
 
 Add a listbox to the given parent.
 
-_Paramaters_:
+_Parameters_:
 
 * `parent` - A Tk frame.
 * `name` - Name of the widget.
@@ -145,7 +145,7 @@ _Paramaters_:
 
 Add a text to the given parent.
 
-_Paramaters_:
+_Parameters_:
 
 * `parent` - A Tk frame.
 * `name` - Name of the widget.
@@ -162,7 +162,7 @@ _Paramaters_:
 
 Add a checkbox to the given parent.
 
-_Paramaters_:
+_Parameters_:
 
 * `parent` - A Tk frame.
 * `name` - Name of the widget.
@@ -175,7 +175,7 @@ _Paramaters_:
 
 Add a button to the given parent.
 
-_Paramaters_:
+_Parameters_:
 
 * `parent` - A Tk frame.
 * `name` - Name of the widget.
@@ -188,7 +188,7 @@ _Paramaters_:
 
 Add a notebook to the given parent.
 
-_Paramaters_:
+_Parameters_:
 
 * `parent` - A Tk frame.
 * `name` - Name of the widget.
@@ -198,7 +198,7 @@ _Paramaters_:
 
 Tab changed event callback for the notebook.
 
-_Paramaters_:
+_Parameters_:
 
 * `event` - Tk event object.
 
@@ -206,7 +206,7 @@ _Paramaters_:
 
 Add a tab to the given notebook.
 
-_Paramaters_:
+_Parameters_:
 
 * `parent` - A notebook.
 * `text` - Text to display on tab.
@@ -227,7 +227,7 @@ Disable all widgets.
 
 Hide the given widget.
 
-_Paramaters_:
+_Parameters_:
 
 * `name` - Name of the widget to hide.
 
@@ -235,7 +235,7 @@ _Paramaters_:
 
 Show the given widget.
 
-_Paramaters_:
+_Parameters_:
 
 * `name` - Name of the widget to hide.
 
@@ -243,7 +243,7 @@ _Paramaters_:
 
 Show the open file (singular) dialog.
 
-_Paramaters_:
+_Parameters_:
 
 * `widget` - Widget in which to save the user's selection.
 * `initialdir` - Starting directory for the file dialog.
@@ -254,7 +254,7 @@ _Paramaters_:
 
 Show the open files (plural) dialog.
 
-_Paramaters_:
+_Parameters_:
 
 * `widget` - Widget in which to save the user's selection.
 * `initialdir` - Starting directory for the file dialog.
@@ -265,7 +265,7 @@ _Paramaters_:
 
 Show the save file dialog.
 
-_Paramaters_:
+_Parameters_:
 
 * `widget` - Widget in which to save the user's selection.
 * `initialdir` - Starting directory for the file dialog.
@@ -276,7 +276,7 @@ _Paramaters_:
 
 Show the open folder dialog.
 
-_Paramaters_:
+_Parameters_:
 
 * `widget` - Widget in which to save the user's selection.
 * `initialdir` - Starting directory for the file dialog.
@@ -287,7 +287,7 @@ _Paramaters_:
 
 Center the given window.
 
-_Paramaters_:
+_Parameters_:
 
 * `window` - TK frame.
 
@@ -295,7 +295,7 @@ _Paramaters_:
 
 Set the icon for the given window.
 
-_Paramaters_:
+_Parameters_:
 
 * `window` - TK frame.
 
@@ -307,7 +307,7 @@ Start the GUI.
 
 Set the progress text.
 
-_Paramaters_:
+_Parameters_:
 
 * `text` - Progress text.
 * `started` - Unix timestamp of when the program started.
@@ -318,7 +318,7 @@ _Paramaters_:
 
 Return the BaseAction subclass to use.
 
-_Paramaters_:
+_Parameters_:
 
 * `inputs` - User input dictionary.
 

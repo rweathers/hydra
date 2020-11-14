@@ -46,7 +46,7 @@ class BaseConfiguration:
 	def __init__(self, prog):
 		"""Initalize the object.
 		
-		Paramaters:
+		Parameters:
 			prog - Program constants dictionary.
 		"""
 		self.prog = prog
@@ -89,7 +89,7 @@ class BaseCLI:
 	def __init__(self, prog, conf, argv):
 		"""Initialize the object.
 		
-		Paramaters:
+		Parameters:
 			prog - Program constants dictionary.
 			conf - Configuration dictionary.
 			argv - Command line arguments (sys.argv).
@@ -117,7 +117,7 @@ class BaseCLI:
 	def parse_arguments(self, argv, defaults):
 		"""Parse the command line arguments and return them in a dictionary.
 			
-		Paramaters:
+		Parameters:
 			argv - Command line arguments (sys.argv).
 		"""
 		flags = self.conf
@@ -270,7 +270,7 @@ class BaseCLI:
 	def output_progress(self, text, started=None, processed=None, total=None):
 		"""Print progress information to standard out.
 		
-		Paramaters:
+		Parameters:
 			text - Progress text.
 			started - Unix timestamp of when the program started.
 			processed - Counter of processed items.
@@ -285,7 +285,7 @@ class BaseCLI:
 	def get_action(self, inputs):
 		"""Return the BaseAction subclass to use.
 		
-		Paramaters:
+		Parameters:
 			inputs - User input dictionary.
 		"""
 		pass
@@ -336,7 +336,7 @@ class BaseGUI(tk.Frame):
 	def __init__(self, master, prog, conf):
 		"""Initialize the object.
 		
-		Paramaters:
+		Parameters:
 			master - Tk Root object.
 			prog - Program constants dictionary.
 			conf - Configuration dictionary.
@@ -466,7 +466,7 @@ class BaseGUI(tk.Frame):
 	def create_title(self, text):
 		"""Add a title label to the root window.
 		
-		Paramaters:
+		Parameters:
 			text - Title text.
 		"""
 		label = ttk.Label(self, text=text, padding=(0, 0, 0, 10), font=("Arial", 18, "bold"))
@@ -475,7 +475,7 @@ class BaseGUI(tk.Frame):
 	def create_entry(self, parent, name, text, default="", largs={}, wargs={}, lgrid={}, wgrid={}):
 		"""Add an entry to the given parent.
 		
-		Paramaters:
+		Parameters:
 			parent - A Tk frame.
 			name - Name of the widget.
 			text - Text for the label.
@@ -504,7 +504,7 @@ class BaseGUI(tk.Frame):
 	def create_browse(self, parent, name, text, command, initialdir=None, initialfile=None, filetypes=[], default="", largs={}, wargs={}, bargs={}, lgrid={}, wgrid={}, bgrid={}):
 		"""Add a file browser to the given parent.
 		
-		Paramaters:
+		Parameters:
 			parent - A Tk frame.
 			name - Name of the widget.
 			text - Text for the label.
@@ -539,7 +539,7 @@ class BaseGUI(tk.Frame):
 	def create_combobox(self, parent, name, text, values, default=None, largs={}, wargs={}, lgrid={}, wgrid={}):
 		"""Add a combobox to the given parent.
 		
-		Paramaters:
+		Parameters:
 			parent - A Tk frame.
 			name - Name of the widget.
 			text - Text for the label.
@@ -570,7 +570,7 @@ class BaseGUI(tk.Frame):
 	def create_listbox(self, parent, name, text, values, selectmode=tk.EXTENDED, largs={}, wargs={}, lgrid={}, wgrid={}):
 		"""Add a listbox to the given parent.
 		
-		Paramaters:
+		Parameters:
 			parent - A Tk frame.
 			name - Name of the widget.
 			text - Text for the label.
@@ -613,7 +613,7 @@ class BaseGUI(tk.Frame):
 	def create_text(self, parent, name, text, height=10, wrap="none", default="", largs={}, wargs={}, lgrid={}, wgrid={}):
 		"""Add a text to the given parent.
 		
-		Paramaters:
+		Parameters:
 			parent - A Tk frame.
 			name - Name of the widget.
 			text - Text for the label.
@@ -663,7 +663,7 @@ class BaseGUI(tk.Frame):
 	def create_checkbox(self, parent, name, text, default=0, wargs={}, wgrid={}):
 		"""Add a checkbox to the given parent.
 		
-		Paramaters:
+		Parameters:
 			parent - A Tk frame.
 			name - Name of the widget.
 			text - Text for the label.
@@ -686,7 +686,7 @@ class BaseGUI(tk.Frame):
 	def create_button(self, parent, name, text, command, bargs={}, bgrid={}):
 		"""Add a button to the given parent.
 		
-		Paramaters:
+		Parameters:
 			parent - A Tk frame.
 			name - Name of the widget.
 			text - Text for the widget.
@@ -709,7 +709,7 @@ class BaseGUI(tk.Frame):
 	def create_notebook(self, parent, name, nargs={}):
 		"""Add a notebook to the given parent.
 		
-		Paramaters:
+		Parameters:
 			parent - A Tk frame.
 			name - Name of the widget.
 			nargs - Constructor arguments for the notebook.
@@ -732,7 +732,7 @@ class BaseGUI(tk.Frame):
 	def notebook_tab_changed(self, event):
 		"""Tab changed event callback for the notebook.
 		
-		Paramaters:
+		Parameters:
 			event - Tk event object.
 		"""
 		tab = event.widget.tab(event.widget.index("current"),"text")
@@ -742,7 +742,7 @@ class BaseGUI(tk.Frame):
 	def create_tab(self, parent, text):
 		"""Add a tab to the given notebook.
 		
-		Paramaters:
+		Parameters:
 			parent - A notebook.
 			text - Text to display on tab.
 		"""
@@ -790,7 +790,7 @@ class BaseGUI(tk.Frame):
 	def hide_widget(self, name):
 		"""Hide the given widget.
 		
-		Paramaters:
+		Parameters:
 			name - Name of the widget to hide.
 		"""
 		self.widgets[name].grid_remove()
@@ -800,7 +800,7 @@ class BaseGUI(tk.Frame):
 	def show_widget(self, name):
 		"""Show the given widget.
 		
-		Paramaters:
+		Parameters:
 			name - Name of the widget to hide.
 		"""
 		self.widgets[name].grid()
@@ -810,7 +810,7 @@ class BaseGUI(tk.Frame):
 	def get_input(self, widget, initialdir, initialfile, filetypes):
 		"""Show the open file (singular) dialog.
 		
-		Paramaters:
+		Parameters:
 			widget - Widget in which to save the user's selection.
 			initialdir - Starting directory for the file dialog.
 			initialfile - Starting filename for the file dialog.
@@ -828,7 +828,7 @@ class BaseGUI(tk.Frame):
 	def get_inputs(self, widget, initialdir, initialfile, filetypes):
 		"""Show the open files (plural) dialog.
 		
-		Paramaters:
+		Parameters:
 			widget - Widget in which to save the user's selection.
 			initialdir - Starting directory for the file dialog.
 			initialfile - Starting filename for the file dialog.
@@ -851,7 +851,7 @@ class BaseGUI(tk.Frame):
 	def get_output(self, widget, initialdir, initialfile, filetypes):
 		"""Show the save file dialog.
 		
-		Paramaters:
+		Parameters:
 			widget - Widget in which to save the user's selection.
 			initialdir - Starting directory for the file dialog.
 			initialfile - Starting filename for the file dialog.
@@ -865,7 +865,7 @@ class BaseGUI(tk.Frame):
 	def get_folder(self, widget, initialdir, ignored1=None, ignored2=None):
 		"""Show the open folder dialog.
 		
-		Paramaters:
+		Parameters:
 			widget - Widget in which to save the user's selection.
 			initialdir - Starting directory for the file dialog.
 			ignored1 - Stub paramater just to be compatible with the other file dialog functions.
@@ -879,7 +879,7 @@ class BaseGUI(tk.Frame):
 	def center(self, window):
 		"""Center the given window.
 		
-		Paramaters:
+		Parameters:
 			window - TK frame.
 		"""
 		window.attributes("-alpha", 0.0) # Prevent flashing of empty frame on Windows
@@ -893,7 +893,7 @@ class BaseGUI(tk.Frame):
 	def set_icon(self, window):
 		"""Set the icon for the given window.
 		
-		Paramaters:
+		Parameters:
 			window - TK frame.
 		"""
 		if self.icon is not None:
@@ -918,7 +918,7 @@ class BaseGUI(tk.Frame):
 	def set_progress(self, text, started=None, processed=None, total=None):
 		"""Set the progress text.
 		
-		Paramaters:
+		Parameters:
 			text - Progress text.
 			started - Unix timestamp of when the program started.
 			processed - Counter of processed items.
@@ -933,7 +933,7 @@ class BaseGUI(tk.Frame):
 	def get_action(self, inputs):
 		"""Return the BaseAction subclass to use.
 		
-		Paramaters:
+		Parameters:
 			inputs - User input dictionary.
 		"""
 		pass
@@ -974,7 +974,7 @@ class BaseAction:
 	def __init__(self, inputs, progress):
 		"""Initialize the object.
 		
-		Paramaters:
+		Parameters:
 			inputs - User input dictionary.
 			progress - Callback function for user progress updates.
 		"""
@@ -1002,7 +1002,7 @@ class BaseAction:
 	def expand(self, field):
 		"""Convert a CSV string into a list of filenames and expand wildcard filenames.
 		
-		Paramaters:
+		Parameters:
 			field - Field name to modify.
 		"""
 		if not isinstance(self.inputs[field], list): self.inputs[field] = list(csv.reader([self.inputs[field]]))[0]
@@ -1017,7 +1017,7 @@ class BaseAction:
 	def open(self, filename, mode="r", encoding="utf-8"):
 		"""Return sys.stdin (for filename == "STDIN"), sys.stdout (for filename == "STDIN") or a file handle.
 		
-		Paramaters:
+		Parameters:
 			filename - "STDIN", "STDOUT" or a filename.
 			mode - File open mode.
 			encoding - File encoding.
@@ -1035,7 +1035,7 @@ class BaseAction:
 def progress(last_update, text, started=None, processed=None, total=None):
 	"""Return progress text with optional time elapsed and estimated time to complete.
 	
-	Paramaters:
+	Parameters:
 		text - Progress text.
 		started - Unix timestamp of when the program started.
 		processed - Counter of processed items.
@@ -1058,7 +1058,7 @@ def progress(last_update, text, started=None, processed=None, total=None):
 def setdefaults(primary, secondary):
 	"""Return a dictionary with the values of primary and secondary merged, with primary taking precedence over secondary.
 	
-	Paramaters:
+	Parameters:
 		primary - The primary dictionary.
 		secondary - The secondary dictionary.
 	"""
@@ -1069,7 +1069,7 @@ def setdefaults(primary, secondary):
 def error_output(ex, error_path):
 	"""Write error details to a file.
 	
-	Paramaters:
+	Parameters:
 		ex - An exception object.
 		error_path - Error filename.
 	"""
@@ -1085,7 +1085,7 @@ def error_output(ex, error_path):
 def main(prog, configuration_class, cli_class, gui_class):
 	"""Run the program.
 	
-	Paramaters:
+	Parameters:
 		prog - Program constants dictionary.
 		configuration_class - A BaseConfiguration subclass.
 		cli_class - A BaseCI subclass.
