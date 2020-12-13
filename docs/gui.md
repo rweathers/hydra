@@ -7,7 +7,7 @@ Base class for defining the graphical user interface.
 * `prog` - Program constants dictionary.
 * `conf` - Configuration dictionary.
 * `icon` - Base-64 encoded string representing the icon.
-* `menu` - List of tuples defining the menu.
+* `menu` - Dictionary defining the menu.
 * `help` - List of dictionaries defining the help.
 * `widgets` - Dictionary of the widget objects.
 * `row` - The next row to use in the grid layout.

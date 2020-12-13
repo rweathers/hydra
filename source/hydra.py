@@ -324,7 +324,7 @@ class BaseGUI(tk.Frame):
 		prog - Program constants dictionary.
 		conf - Configuration dictionary.
 		icon - Base-64 encoded string representing the icon.
-		menu - List of tuples defining the menu.
+		menu - Dictionary defining the menu.
 		help - List of dictionaries defining the help.
 		widgets - Dictionary of the widget objects.
 		row - The next row to use in the grid layout.
@@ -347,7 +347,7 @@ class BaseGUI(tk.Frame):
 		self.prog = prog
 		self.conf = conf
 		self.icon = None
-		self.menu = []
+		self.menu = {}
 		self.help = []
 		self.widgets = {}
 		self.row = 1
@@ -378,10 +378,28 @@ class BaseGUI(tk.Frame):
 		"""Create the menu and add it to the root window."""
 		if len(self.menu) > 0:
 			menubar = tk.Menu(self)
-			for label, items in self.menu:
-				menu = tk.Menu(menubar, tearoff=0)
-				for label2, command2 in items: menu.add_command(label=label2, command=command2)
-				menubar.add_cascade(label=label, menu=menu)
+			
+			# Backward compatiblity
+			if isinstance(self.menu, list):
+				print("Deprecation Warning: Using a list of tuples for the menu has been deprecated. Please use a dict instead.")
+				for label, items in self.menu:
+					menu = tk.Menu(menubar, tearoff=0)
+					for label2, command2 in items: menu.add_command(label=label2, command=command2)
+					menubar.add_cascade(label=label, menu=menu)
+			else:
+				# END Backward compatiblity
+				
+				def addmenu(parent, setup):
+					for label in setup:
+						if isinstance(setup[label], dict):
+							submenu = tk.Menu(parent, tearoff=0)
+							addmenu(submenu, setup[label])
+							parent.add_cascade(label=label, menu=submenu)
+						else:
+							parent.add_command(label=label, command=setup[label])
+				
+				addmenu(menubar, self.menu)
+				
 			self.master.config(menu=menubar)
 	
 	def open_config(self):

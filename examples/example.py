@@ -75,9 +75,9 @@ class CLI(BaseCLI):
 			("greeting", "g", "A greeting"              , "value"),
 			("name"    , "n", "A name"                  , "value")
 			
-			#("long-name", "char", "Description", "boolean"),
-			#("long-name", "char", "Description", "value"),
-			#("long-name", "char", "Description", "multiple"),
+			#("long-name", "char", "Description", "boolean")
+			#("long-name", "char", "Description", "value")
+			#("long-name", "char", "Description", "multiple")
 		]
 		
 		# Flags used: g, h, l, n, q, v, V
@@ -99,14 +99,16 @@ class GUI(BaseGUI):
 		
 	def define_menu(self):
 		# TODO - define your menu. This is optional. Don't override define_menu() to have no menu.
-		self.menu = [
-			("File"    , [("Exit", self.quit)]),
-			("Edit"    , [("Reset", self.set_defaults)]),
-			("Settings", [("Open Config File", self.open_config)]),
-			("Help"    , [("Help", self.show_help), ("About", self.show_about)])
+		self.menu = {
+			"File":{"Exit":self.quit},
+			"Edit":{"Reset":self.set_defaults},
+			"Settings":{"Open Config File":self.open_config},
+			"Help":{"Help":self.show_help, "About":self.show_about}
 			
-			#("Label", [("Label1", callback1), ... ("LabelN", callbackN])
-		]
+			#"Label":callback
+			#"Label":{"Sub Label 1":callback1, ... "Sub Label N":callbackN}
+			#"Label":{"Sub Label":{"Sub Sub Label":callback}}
+		}
 	
 	def define_help(self, help):
 		# TODO - define your help. help is a tk Text object.
