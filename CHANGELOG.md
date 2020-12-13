@@ -22,6 +22,14 @@ Added program constants dictionary to BaseConfiguration.
 
 Added BaseAction.execute.
 
-Added BaseCLI.create_usage and deprecated program["usage"]
+Added BaseCLI.create_usage and deprecated program["usage"].
 
-Added BaseGUI.create_icon and deprecated program["icon-*"]
+Added BaseGUI.create_icon and deprecated program["icon-*"].
+
+## 0.3.0-alpha (2020-12-13)
+
+Added support for top-level and nested menu commands.
+
+Added support for a dictionary in GUI.menu.
+
+Deprecated support for lists of tuples in GUI.menu.
