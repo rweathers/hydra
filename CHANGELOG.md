@@ -33,3 +33,9 @@ Added support for top-level and nested menu commands.
 Added support for a dictionary in GUI.menu.
 
 Deprecated support for lists of tuples in GUI.menu.
+
+## 0.4.0-beta (2021-03-07)
+
+Removed deprecated features.
+
+Made Action progress optional.
