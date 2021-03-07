@@ -70,8 +70,7 @@ class CLI(BaseCLI):
 			("version" , "V", "Show version information", "boolean"),
 			("license" , "l", "Show license information", "boolean"),
 			("quiet"   , "q", "Suppress all output"     , "boolean"),
-			("verbose" , "v", "Enable verbose output\n" , "boolean"),
-			
+			("verbose" , "v", "Enable verbose output"   , "boolean"),
 			("greeting", "g", "A greeting"              , "value"),
 			("name"    , "n", "A name"                  , "value")
 			

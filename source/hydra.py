@@ -228,14 +228,14 @@ class BaseCLI:
 			desc = desc.replace("\n", "\n " + " " * width)
 			if type == "boolean":
 				if short != "": short = "-" + short + ", "
-				print(("    " + short + "--" + long).ljust(width)[0:width] + " " + desc)
+				print(("  " + short + "--" + long).ljust(width)[0:width] + " " + desc)
 			elif type == "value":
 				if short != "": short = "-" + short + " VALUE, "
-				print(("    " + short + "--" + long + " VALUE").ljust(width)[0:width] + " " + desc)
+				print(("  " + short + "--" + long + " VALUE").ljust(width)[0:width] + " " + desc)
 			elif type == "multiple":
 				if short != "": short = "-" + short + " VALUE(S), "
-				print(("    " + short + "--" + long + " VALUE(S)").ljust(width)[0:width] + " " + desc)
-
+				print(("  " + short + "--" + long + " VALUE(S)").ljust(width)[0:width] + " " + desc)
+		
 		print("")
 		
 		if self.prog["config"] is not None:

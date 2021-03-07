@@ -46,7 +46,7 @@ class CLI(BaseCLI):
 			("version" , "V", "Show version information"           , "boolean"),
 			("license" , "l", "Show license information"           , "boolean"),
 			("quiet"   , "q", "Suppress all output"                , "boolean"),
-			("verbose" , "v", "Enable verbose output\n"            , "boolean"),
+			("verbose" , "v", "Enable verbose output"              , "boolean"),
 			("action"  , "a", "One of: action1, action2 or action3", "value"),
 			("value1"  , "1", "Value #1"                           , "value"),
 			("value2"  , "2", "Value #2"                           , "value"),
