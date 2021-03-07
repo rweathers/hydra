@@ -218,10 +218,6 @@ class BaseCLI:
 		print(self.prog["name"], self.prog["version"])
 		print(self.prog["purpose"])
 		
-		# Backwards Compatibility
-		if ("usage" in self.prog) and (self.usage == ""): self.usage = self.prog["usage"]
-		# END Backwards Compatibility
-		
 		usage = self.usage.strip().split("\n")
 		prefix = "Usage:"
 		for u in usage:
@@ -379,27 +375,17 @@ class BaseGUI(tk.Frame):
 		if len(self.menu) > 0:
 			menubar = tk.Menu(self)
 			
-			# Backward compatiblity
-			if isinstance(self.menu, list):
-				print("Deprecation Warning: Using a list of tuples for the menu has been deprecated. Please use a dict instead.")
-				for label, items in self.menu:
-					menu = tk.Menu(menubar, tearoff=0)
-					for label2, command2 in items: menu.add_command(label=label2, command=command2)
-					menubar.add_cascade(label=label, menu=menu)
-			else:
-				# END Backward compatiblity
-				
-				def addmenu(parent, setup):
-					for label in setup:
-						if isinstance(setup[label], dict):
-							submenu = tk.Menu(parent, tearoff=0)
-							addmenu(submenu, setup[label])
-							parent.add_cascade(label=label, menu=submenu)
-						else:
-							parent.add_command(label=label, command=setup[label])
-				
-				addmenu(menubar, self.menu)
-				
+			def addmenu(parent, setup):
+				for label in setup:
+					if isinstance(setup[label], dict):
+						submenu = tk.Menu(parent, tearoff=0)
+						addmenu(submenu, setup[label])
+						parent.add_cascade(label=label, menu=submenu)
+					else:
+						parent.add_command(label=label, command=setup[label])
+			
+			addmenu(menubar, self.menu)
+			
 			self.master.config(menu=menubar)
 	
 	def open_config(self):
@@ -917,14 +903,6 @@ class BaseGUI(tk.Frame):
 		if self.icon is not None:
 			img = tk.PhotoImage(data=self.icon)
 			window.tk.call("wm", "iconphoto", window._w, img)
-		# Backward compatiblity
-		elif ("icon-data" in self.prog) and (self.prog["icon-data"] is not None):
-			img = tk.PhotoImage(data=self.prog["icon-data"])
-			window.tk.call("wm", "iconphoto", window._w, img)
-		elif ("icon-file" in self.prog) and (self.prog["icon-file"] is not None):
-			img = tk.PhotoImage(file=self.prog["icon-file"])
-			window.tk.call("wm", "iconphoto", window._w, img)
-		# END Backward compatiblity
 	
 	def start(self):
 		"""Start the GUI."""
@@ -1113,15 +1091,6 @@ def main(prog, configuration_class, cli_class, gui_class):
 	path += os.sep
 	if prog["config"] is not None: prog["config"] = prog["config"].format(path=path)
 	if prog["error"]  is not None: prog["error"]  = prog["error"].format(path=path)
-	
-	# Backwards compatiblity
-	if ("icon-data" in prog) and (prog["icon-file"] is not None): prog["icon-file"] = prog["icon-file"].format(path=path)
-	# END Backwards compatiblity
-	
-	# Deprecation warnings
-	if "usage" in prog: print("Deprecation Warning: program[\"usage\"] has been deprecated. Use BaseCLI.define_usage instead.")
-	if ("icon-data" in prog) or ("icon-file" in prog): print("Deprecation Warning: program[\"icon-*\"] has been deprecated. Use BaseGUI.define_icon instead.")
-	# END Deprecation warnings
 	
 	try:
 		if ("gui" not in sys.argv) and ((len(sys.argv) > 1) or ((sys.stdin is not None) and not sys.stdin.isatty())):
