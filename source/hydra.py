@@ -967,7 +967,7 @@ class BaseAction:
 		progress - Callback function for user progress updates.
 	"""
 	
-	def __init__(self, inputs, progress):
+	def __init__(self, inputs, progress=None):
 		"""Initialize the object.
 		
 		Parameters:
@@ -975,7 +975,7 @@ class BaseAction:
 			progress - Callback function for user progress updates.
 		"""
 		self.inputs = inputs
-		self.progress = progress
+		self.progress = progress if progress is not None else lambda *_: None
 	
 	def standardize(self):
 		"""Standardize the user's inputs."""

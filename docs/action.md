@@ -9,7 +9,7 @@ Base class for defining actions.
 
 ## Functions
 
-### BaseAction(inputs, progress)
+### BaseAction(inputs, progress=None)
 
 Initialize the object.
 
