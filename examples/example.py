@@ -25,14 +25,14 @@ class Action(BaseAction):
 		pass
 	
 	def validate(self):
-		errors = ""
+		errors = []
 		
 		# TODO - validate your inputs
 		
-		if self.inputs["greeting"] == "": errors += "Greeting required\n"
-		if self.inputs["name"]     == "": errors += "Name required\n"
+		if self.inputs["greeting"] == "": errors.append("Greeting required")
+		if self.inputs["name"]     == "": errors.append("Name required")
 		
-		if errors != "": raise Exception(errors)
+		if errors: raise Exception("\n".join(errors))
 	
 	def action(self):
 		# TODO - perform the task
@@ -48,19 +48,19 @@ class Action(BaseAction):
 			time.sleep(0.5)
 			
 			i += 1
-			self.progress("Record: " + str(i), started, i, z)
+			self.progress("Record: {}".format(i), started, i, z)
 		
-		return self.inputs["greeting"] + " " + self.inputs["name"] + "!"
+		return "{} {}!".format(self.inputs["greeting"], self.inputs["name"])
 
 class Configuration(BaseConfiguration):
 	def validate(self):
-		errors = ""
+		errors = []
 		
 		# TODO - validate your config file
 		
-		if self.conf.get("example", "") == "": errors += "'example' is required\n"
+		if self.conf.get("example", "") == "": errors.append("'example' is required")
 		
-		if errors != "": raise Exception("The following errors occurred when parsing " + self.filename + "\n\n" + errors)
+		if errors: raise Exception("The following errors occurred when parsing {}:\n{}".format(self.filename, "\n".join(errors)))
 
 class CLI(BaseCLI):
 	def define_arguments(self):

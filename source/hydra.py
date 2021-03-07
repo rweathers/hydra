@@ -62,7 +62,7 @@ class BaseConfiguration:
 		try:
 			open(self.filename, "r").close()
 		except Exception as e:
-			raise Exception(self.filename + " not found.")
+			raise Exception("{} not found".format(self.filename))
 		
 		cp = configparser.ConfigParser()
 		cp.read(self.filename)
@@ -140,7 +140,7 @@ class BaseCLI:
 				flags[long] = [] if defaults.get(long, "") == "" else [defaults.get(long, "")]
 				multiple.append(long)
 			else:
-				raise Exception("Invalid argument type: " + type)
+				raise Exception("Invalid argument type: {}".format(type))
 		
 		# Convert all flags to their long version
 		long_args = []
@@ -158,11 +158,11 @@ class BaseCLI:
 				
 				# Is this a valid flag?
 				if val in flags:
-					long_args.append("--" + val)
+					long_args.append("--{}".format(val))
 					if extra is not None: long_args.append(extra)
 					count += 1
 				else:
-					raise Exception("Unknown argument: " + val)
+					raise Exception("Unknown argument: {}".format(val))
 			elif val.startswith("-"):
 				# Split and convert short flags
 				i = 1
@@ -171,10 +171,10 @@ class BaseCLI:
 					
 					# Is this a valid flag?
 					if f in map:
-						long_args.append("--" + map[f])
+						long_args.append("--{}".format(map[f]))
 						count += 1
 					else:
-						raise Exception("Unknown argument: " + f)
+						raise Exception("Unknown argument: {}".format(f))
 						
 					i+=1
 			else:
@@ -225,21 +225,24 @@ class BaseCLI:
 			prefix = "      "
 		
 		for (long, short, desc, type) in self.arguments:
-			desc = desc.replace("\n", "\n " + " " * width)
 			if type == "boolean":
-				if short != "": short = "-" + short + ", "
-				print(("  " + short + "--" + long).ljust(width)[0:width] + " " + desc)
+				if short != "": short = "-{}, ".format(short)
+				long = "--{}".format(long)
 			elif type == "value":
-				if short != "": short = "-" + short + " VALUE, "
-				print(("  " + short + "--" + long + " VALUE").ljust(width)[0:width] + " " + desc)
+				if short != "": short = "-{} VALUE, ".format(short)
+				long = "--{} VALUE".format(long)
 			elif type == "multiple":
-				if short != "": short = "-" + short + " VALUE(S), "
-				print(("  " + short + "--" + long + " VALUE(S)").ljust(width)[0:width] + " " + desc)
+				if short != "": short = "-{} VALUE(S), ".format(short)
+				long = "--{} VALUE(S)".format(long)
+			
+			arg = "  {}{}".format(short, long).ljust(width)[0:width]
+			desc = desc.replace("\n", "\n {}".format(" " * width))
+			print("{} {}".format(arg, desc))
 		
 		print("")
 		
 		if self.prog["config"] is not None:
-			print("See " + self.prog["config"] + " for default values")
+			print("See '{}' for default values".format(self.prog["config"]))
 			print("")
 		
 		if self.prog["url"] is not None:
@@ -276,7 +279,7 @@ class BaseCLI:
 			p = progress(self.last_update, text, started, processed, total)
 			if p is not None:
 				self.last_update = p[0]
-				print(p[1].ljust(80)[0:80-1] + "\r", end="", flush=True)
+				print(p[1].ljust(80)[0:80-1], end="\r", flush=True)
 	
 	def get_action(self, inputs):
 		"""Return the BaseAction subclass to use.
@@ -306,7 +309,9 @@ class BaseCLI:
 					print(message)
 					print("")
 		except Exception as e:
-			print(("ERROR: " + str(e)).ljust(80))
+			print("ERROR:".ljust(80))
+			print(str(e))
+			print("")
 			if self.inputs.get("verbose", False):
 				import traceback
 				print(traceback.format_exc())
@@ -411,8 +416,8 @@ class BaseGUI(tk.Frame):
 		help.tag_configure("bold"  , font=("Arial", 12, "bold"))
 		help.tag_configure("italic", font=("Arial", 10, "italic"))
 		
-		help.insert(tk.END, self.prog["name"] + " Help\n", "title")
-		help.insert(tk.END, "\n" + self.prog["purpose"] + "\n\n", "normal")
+		help.insert(tk.END, "{} Help\n".format(self.prog["name"]), "title")
+		help.insert(tk.END, "\n{}\n\n".format(self.prog["purpose"]), "normal")
 		
 		self.define_help(help)
 		
@@ -435,7 +440,7 @@ class BaseGUI(tk.Frame):
 
 		labels = []
 		labels.append({"text":self.prog["name"], "padding":p1, "font":("Arial", 18, "bold")})
-		labels.append({"text":"Version " + self.prog["version"], "padding":p3})
+		labels.append({"text":"Version {}".format(self.prog["version"]), "padding":p3})
 		labels.append({"text":self.prog["date"]})
 		labels.append({"text":self.prog["purpose"]})
 		if self.prog["url"] is not None: labels.append({"text":self.prog["url"], "foreground":"blue", "cursor":"hand2"})
@@ -538,7 +543,7 @@ class BaseGUI(tk.Frame):
 		button.setval = value.set
 		button.grid(**setdefaults(bgrid, {"row":parent.row-1, "column":2, "sticky":"W"}))
 		
-		self.widgets[name + "-browse"] = button
+		self.widgets["{}-browse".format(name)] = button
 	
 	def create_combobox(self, parent, name, text, values, default=None, largs={}, wargs={}, lgrid={}, wgrid={}):
 		"""Add a combobox to the given parent.
@@ -799,7 +804,7 @@ class BaseGUI(tk.Frame):
 		"""
 		self.widgets[name].grid_remove()
 		if hasattr(self.widgets[name], "label"): self.widgets[name].label.grid_remove()
-		if name + "-browse" in self.widgets: self.widgets[name + "-browse"].grid_remove()
+		if "{}-browse".format(name) in self.widgets: self.widgets["{}-browse".format(name)].grid_remove()
 	
 	def show_widget(self, name):
 		"""Show the given widget.
@@ -809,7 +814,7 @@ class BaseGUI(tk.Frame):
 		"""
 		self.widgets[name].grid()
 		if hasattr(self.widgets[name], "label"): self.widgets[name].label.grid()
-		if name + "-browse" in self.widgets: self.widgets[name + "-browse"].grid()
+		if "{}-browse".format(name) in self.widgets: self.widgets["{}-browse".format(name)].grid()
 	
 	def get_input(self, widget, initialdir, initialfile, filetypes):
 		"""Show the open file (singular) dialog.
@@ -844,7 +849,7 @@ class BaseGUI(tk.Frame):
 		if len(result) == 1:
 			result = result[0]
 		else:
-			result = map(lambda f: "\"" + f.replace("\"", "\\\"") + "\"", result)
+			result = map(lambda f: "\"{}\"".format(f.replace("\"", "\\\"")), result)
 			result = ",".join(result)
 		widget.setval(result)
 		
@@ -906,7 +911,7 @@ class BaseGUI(tk.Frame):
 	
 	def start(self):
 		"""Start the GUI."""
-		self.master.wm_title(self.prog["name"] + " " + self.prog["version"])
+		self.master.wm_title("{} {}".format(self.prog["name"], self.prog["version"]))
 		self.set_icon(self.master)
 		self.center(self.master)
 		self.mainloop()
@@ -1018,7 +1023,7 @@ class BaseAction:
 			mode - File open mode.
 			encoding - File encoding.
 		"""
-		if self.inputs.get("verbose", False): self.progress("Opening " + filename + "\n")
+		if self.inputs.get("verbose", False): self.progress("Opening {}\n".format(filename))
 		
 		if filename == "STDIN":
 			if (sys.stdin is not None) and sys.stdin.isatty(): raise Exception("Empty STDIN")
@@ -1044,8 +1049,8 @@ def progress(last_update, text, started=None, processed=None, total=None):
 			elapsed = now - started
 			remaining = (0 if processed == 0 else (elapsed/processed)) * (total - processed)
 			
-			hh_mm_ss = lambda t: (str(int(t/3600.0)) + ":" if t >= 3600 else "") + str(int(t/60.0)%60).zfill(2) + ":" + str(int(t%60)).zfill(2)
-			text += " | Time: " + hh_mm_ss(elapsed) + "/" + hh_mm_ss(remaining) + " | Progress: " + str(int((0 if total == 0 else (processed/total)) * 100.0)) + "%"
+			hh_mm_ss = lambda t: "{}{:02d}:{:02d}".format("{}:".format(int(t/3600.0)) if t >= 3600 else "", int(t/60.0)%60, int(t%60))
+			text = "{} | Time: {}/{} | Progress {}%".format(text, hh_mm_ss(elapsed), hh_mm_ss(remaining), int((0 if total == 0 else (processed/total)) * 100.0))
 		
 		return (ms, text)
 	else:
@@ -1073,9 +1078,12 @@ def error_output(ex, error_path):
 	
 	if error_path is not None:
 		try:
-			with open(error_path, mode="w") as f: f.write(str(ex) + "\n\n" + traceback.format_exc())
+			with open(error_path, mode="w") as f: f.write("{}\n\n{}".format(str(ex), traceback.format_exc()))
 		except Exception as e:
-			print("ERROR: " + str(e))
+			print("")
+			print("ERROR:")
+			print(str(e))
+			print("")
 			print(traceback.format_exc())
 
 def main(prog, configuration_class, cli_class, gui_class):
@@ -1098,7 +1106,10 @@ def main(prog, configuration_class, cli_class, gui_class):
 				conf = configuration_class(prog)
 				cli = cli_class(prog, conf.conf, sys.argv)
 			except Exception as e:
-				print("ERROR: " + str(e))
+				print("")
+				print("ERROR:")
+				print(str(e))
+				print("")
 				raise
 		else:
 			root = tk.Tk()
