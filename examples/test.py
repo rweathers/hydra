@@ -1,14 +1,14 @@
 #! /usr/bin/python3
 
 from hydra import progress
-from example import Action
+from example import Action, Configuration
 
 last_update = 0
 
-def test1():
+def test1(inputs):
 	print("Running Test 1 ... ", end="", flush=True)
 	
-	inputs = {"greeting":"Hello", "name":"World"}
+	inputs.update({"greeting":"Hello", "name":"World"})
 	action = Action(inputs)
 	message = action.execute()
 	
@@ -19,7 +19,8 @@ def test1():
 
 def main():
 	try:
-		test1()
+		conf = Configuration({"config":"example.ini"})
+		test1(conf.conf)
 	except Exception as e:
 		import traceback
 		print("ERROR: " + str(e))
