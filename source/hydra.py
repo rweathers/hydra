@@ -99,6 +99,7 @@ class BaseCLI:
 		self.arguments = []
 		self.usage = ""
 		self.last_update = 0
+		self.twidth = 80
 		
 		self.define_arguments()
 		self.define_usage()
@@ -279,7 +280,7 @@ class BaseCLI:
 			p = progress(self.last_update, text, started, processed, total)
 			if p is not None:
 				self.last_update = p[0]
-				print(p[1].ljust(80)[0:80-1], end="\r", flush=True)
+				print(p[1].ljust(self.twidth)[0:self.twidth], end="\r", flush=True)
 	
 	def get_action(self, inputs):
 		"""Return the BaseAction subclass to use.
@@ -309,7 +310,7 @@ class BaseCLI:
 					print(message)
 					print("")
 		except Exception as e:
-			print("ERROR:".ljust(80))
+			print("ERROR:".ljust(self.twidth))
 			print(str(e))
 			print("")
 			if self.inputs.get("verbose", False):
