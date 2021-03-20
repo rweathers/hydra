@@ -39,3 +39,7 @@ Deprecated support for lists of tuples in GUI.menu.
 Removed deprecated features.
 
 Made Action progress optional.
+
+## 0.5.0-beta (2021-03-20)
+
+Added double-click event to entires to open the specified path.
