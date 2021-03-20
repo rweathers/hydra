@@ -26,6 +26,7 @@ import configparser
 import decimal
 import glob
 import os
+import subprocess
 import sys
 import time
 import tkinter as tk
@@ -393,11 +394,18 @@ class BaseGUI(tk.Frame):
 			addmenu(menubar, self.menu)
 			
 			self.master.config(menu=menubar)
+			
+	def open_user_file(self, path):
+		"""Open the path in the system default application."""
+		try:
+			subprocess.call(["xdg-open", path])
+		except Exception as e:
+			webbrowser.open(path)
 	
 	def open_config(self):
 		"""Open the configuration file."""
-		webbrowser.open(self.prog["config"])
-
+		self.open_user_file(self.prog["config"])
+	
 	def define_help(self, help):
 		"""Define the help information."""
 		pass
@@ -506,10 +514,20 @@ class BaseGUI(tk.Frame):
 		entry.getval = value.get
 		entry.setval = value.set
 		entry.grid(**setdefaults(wgrid, {"row":parent.row, "column":1, "padx":self.padding, "pady":self.padding, "sticky":"W"}))
+		entry.bind("<Double-Button-1>", self.entry_double_clicked)
 		
 		self.widgets[name] = entry
 		
 		parent.row += 1
+	
+	def entry_double_clicked(self, event):
+		"""Double-click event callback for the entry.
+		
+		Parameters:
+			event - Tk event object.
+		"""
+		path = event.widget.getval()
+		if os.path.exists(path): self.open_user_file(path)
 	
 	def create_browse(self, parent, name, text, command, initialdir=None, initialfile=None, filetypes=[], default="", largs={}, wargs={}, bargs={}, lgrid={}, wgrid={}, bgrid={}):
 		"""Add a file browser to the given parent.
