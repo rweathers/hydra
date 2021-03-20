@@ -9,6 +9,7 @@ Base class for defining the command line interface.
 * `arguments` - Command line arguments (sys.argv).
 * `usage` - Command line usage.
 * `last_update` - Unix timestamp of last user progress update.
+* `twidth` - terminal width.
 * `inputs` - User input dictionary.
 
 ## Functions

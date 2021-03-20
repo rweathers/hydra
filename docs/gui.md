@@ -39,6 +39,14 @@ Define the menu.
 
 Create the menu and add it to the root window.
 
+### open_user_file(path)
+
+Open the path in the system default application.
+
+_Parameters_:
+
+* `path` - A folder or file path.
+
 ### open_config()
 
 Open the configuration file.
@@ -86,6 +94,13 @@ _Parameters_:
 * `lgrid` - grid() arguments for the label.
 * `wgrid` - grid() arguments for the widget.
 
+### entry_double_clicked(event)
+
+Double-click event callback for the entry.
+
+_Parameters_:
+
+* `event` - Tk event object.
 
 ### create_browse(parent, name, text, command, initialdir=None, initialfile=None, filetypes=[], default="", largs={}, wargs={}, bargs={}, lgrid={}, wgrid={}, bgrid={})
 

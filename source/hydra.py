@@ -396,7 +396,11 @@ class BaseGUI(tk.Frame):
 			self.master.config(menu=menubar)
 			
 	def open_user_file(self, path):
-		"""Open the path in the system default application."""
+		"""Open the path in the system default application.
+		
+		Parameters:
+			path - A folder or file path.
+		"""
 		try:
 			subprocess.call(["xdg-open", path])
 		except Exception as e:
