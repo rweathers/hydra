@@ -3,8 +3,6 @@
 from hydra import progress
 from example import Action, Configuration
 
-last_update = 0
-
 def test1(inputs):
 	print("Running Test 1 ... ", end="", flush=True)
 	
