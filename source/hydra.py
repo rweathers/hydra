@@ -1067,7 +1067,7 @@ def progress(last_update, text, started=None, processed=None, total=None):
 	"""
 	now = time.time()
 	ms = int(round(now * 1000))
-	if ((ms - last_update) > 100) or (started is None):
+	if ((ms - last_update) > 100) or (started is None) or (processed == total):
 		if started is not None:
 			elapsed = now - started
 			remaining = (0 if processed == 0 else (elapsed/processed)) * (total - processed)
