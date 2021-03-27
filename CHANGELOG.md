@@ -43,3 +43,7 @@ Made Action progress optional.
 ## 0.5.0-beta (2021-03-20)
 
 Added double-click event to entires to open the specified path.
+
+## 0.5.1-beta (2021-03-27)
+
+Forced display of the 100% success message in the GUI version.
