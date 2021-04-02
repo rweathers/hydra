@@ -36,6 +36,6 @@ Run the program.
 _Parameters_:
 
 * `prog` - Program constants dictionary.
-* `configuration_class` - A BaseConfiguration subclass.
-* `cli_class` - A BaseCI subclass.
-* `gui_class` - A BaseGUI subclass.
+* `configuration_class` - A BaseConfiguration subclass or None.
+* `cli_class` - A BaseCI subclass or None.
+* `gui_class` - A BaseGUI subclass or None.

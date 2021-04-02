@@ -13,10 +13,9 @@ Download the latest wheel from the [release](release) folder and install with PI
 To use Hydra, you must define:
 
 * A program constants dictionary
-* A subclass of `BaseConfiguration`
+* A subclass of `BaseConfiguration` if using a config file
 * At least one subclass of `BaseAction`
-* A subclass of `BaseCLI`
-* A subclass of `BaseGUI`
+* A subclass of `BaseCLI` and/or `BaseGUI`
 
 Then call the `main()` function. See below for a minimal layout.
 

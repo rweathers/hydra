@@ -4,18 +4,15 @@ from hydra import *
 
 program = {
 	"name"     :"Hydra Example #2",
-	"version"  :"0.2.0",
-	"date"     :"02/08/2019",
+	"version"  :"0.3.0",
+	"date"     :"04/02/2021",
 	"purpose"  :"Demonstrates tabs and multiple actions.",
 	"url"      :"https://github.com/rweathers/hydra",
-	"copyright":"Copyright © 2017, 2018, 2019 Ryan Weathers, All Rights Reserved.",
+	"copyright":"Copyright © 2017, 2018, 2019, 2020, 2021 Ryan Weathers, All Rights Reserved.",
 	"license"  :"This program is free software: you can redistribute it and/or modify\nit under the terms of the GNU General Public License as published by\nthe Free Software Foundation, either version 3 of the License, or\n(at your option) any later version.\n\nThis program is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of\nMERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\nGNU General Public License for more details.\n\nYou should have received a copy of the GNU General Public License\nalong with this program.  If not, see <http://www.gnu.org/licenses/>.", # None for no license
 	"config"   :None,
 	"error"    :None
 }
-
-class Configuration(BaseConfiguration):
-	pass
 
 class Action1(BaseAction):
 	def validate(self):
@@ -91,4 +88,4 @@ class GUI(BaseGUI):
 		else:
 			raise Exception("An unknown error has occured")
 
-if __name__ == "__main__": main(program, Configuration, CLI, GUI)
+if __name__ == "__main__": main(program, None, CLI, GUI)

@@ -1111,9 +1111,9 @@ def main(prog, configuration_class, cli_class, gui_class):
 	
 	Parameters:
 		prog - Program constants dictionary.
-		configuration_class - A BaseConfiguration subclass.
-		cli_class - A BaseCI subclass.
-		gui_class - A BaseGUI subclass.
+		configuration_class - A BaseConfiguration subclass or None.
+		cli_class - A BaseCI subclass or None.
+		gui_class - A BaseGUI subclass or None.
 	"""
 	path = os.path.dirname(sys.executable) if hasattr(sys, "frozen") else sys.path[0]
 	path += os.sep
@@ -1121,21 +1121,23 @@ def main(prog, configuration_class, cli_class, gui_class):
 	if prog["error"]  is not None: prog["error"]  = prog["error"].format(path=path)
 	
 	try:
-		if ("gui" not in sys.argv) and ((len(sys.argv) > 1) or ((sys.stdin is not None) and not sys.stdin.isatty())):
+		if (cli_class is not None) and ("gui" not in sys.argv) and ((len(sys.argv) > 1) or ((sys.stdin is not None) and not sys.stdin.isatty())):
 			try:
-				conf = configuration_class(prog)
-				cli = cli_class(prog, conf.conf, sys.argv)
+				conf = configuration_class(prog).conf if configuration_class is not None else {}
+				cli = cli_class(prog, conf, sys.argv)
 			except Exception as e:
 				print("\nERROR:\n{}\n".format(e))
 				raise
-		else:
+		elif (gui_class is not None):
 			root = tk.Tk()
 			try:
-				conf = configuration_class(prog)
-				gui = gui_class(root, prog, conf.conf)
+				conf = configuration_class(prog).conf if configuration_class is not None else {}
+				gui = gui_class(root, prog, conf)
 			except Exception as e:
 				root.withdraw()
 				tk.messagebox.showerror("ERROR", str(e))
 				raise
+		else:
+			print("\nERROR:\nNo UI defined.\n")
 	except Exception as e:
 		error_output(e, prog["error"])
