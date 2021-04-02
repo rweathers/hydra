@@ -1,6 +1,6 @@
 #! /usr/bin/python3
 
-from example import Action, Configuration
+from example import program, Configuration, Action
 
 def test1(inputs):
 	print("Running Test 1 ... ", end="", flush=True)
@@ -16,7 +16,7 @@ def test1(inputs):
 
 def main():
 	try:
-		conf = Configuration({"config":"example.ini"})
+		conf = Configuration(program)
 		test1(conf.conf)
 	except Exception as e:
 		import traceback

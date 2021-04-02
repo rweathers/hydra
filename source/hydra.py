@@ -55,6 +55,7 @@ class BaseConfiguration:
 		self.conf = {}
 		
 		if self.filename is not None:
+			if "{path}" in self.filename: self.filename = self.filename.format(path="")
 			self.load()
 			self.validate()
 	
