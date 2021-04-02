@@ -1,6 +1,5 @@
 #! /usr/bin/python3
 
-from hydra import progress
 from example import Action, Configuration
 
 def test1(inputs):
