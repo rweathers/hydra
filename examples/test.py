@@ -20,7 +20,6 @@ def main():
 		test1(conf.conf)
 	except Exception as e:
 		import traceback
-		print("ERROR: " + str(e))
-		print(traceback.format_exc())
+		print("\n\n{}".format(traceback.format_exc()))
 
 if __name__ == "__main__": main()

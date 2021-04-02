@@ -1102,12 +1102,8 @@ def error_output(ex, error_path):
 	
 	if error_path is not None:
 		try:
-			with open(error_path, mode="w") as f: f.write("{}\n\n{}".format(str(ex), traceback.format_exc()))
+			with open(error_path, mode="w") as f: f.write(traceback.format_exc())
 		except Exception as e:
-			print("")
-			print("ERROR:")
-			print(str(e))
-			print("")
 			print(traceback.format_exc())
 
 def main(prog, configuration_class, cli_class, gui_class):
@@ -1130,10 +1126,7 @@ def main(prog, configuration_class, cli_class, gui_class):
 				conf = configuration_class(prog)
 				cli = cli_class(prog, conf.conf, sys.argv)
 			except Exception as e:
-				print("")
-				print("ERROR:")
-				print(str(e))
-				print("")
+				print("\nERROR:\n{}\n".format(e))
 				raise
 		else:
 			root = tk.Tk()
