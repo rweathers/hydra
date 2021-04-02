@@ -13,8 +13,8 @@ Download the latest wheel from the [release](release) folder and install with PI
 To use Hydra, you must define:
 
 * A program constants dictionary
-* At least one subclass of `BaseAction`
 * A subclass of `BaseConfiguration`
+* At least one subclass of `BaseAction`
 * A subclass of `BaseCLI`
 * A subclass of `BaseGUI`
 
@@ -27,6 +27,10 @@ program = {
 	# Define program constants
 }
 
+class Configuration(BaseConfiguration):
+	def validate(self):
+		# Raise an exception if any configuration values are invalid.
+
 class Action(BaseAction):
 	def standarize(self):
 		# Standardize the user's inputs.
@@ -36,10 +40,6 @@ class Action(BaseAction):
 
 	def action(self):
 		# Perform the task and return a message for the user.
-
-class Configuration(BaseConfiguration):
-	def validate(self):
-		# Raise an exception if any configuration values are invalid.
 
 class CLI(BaseCLI):
 	def define_arguments(self):

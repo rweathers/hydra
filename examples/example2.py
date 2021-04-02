@@ -1,6 +1,5 @@
 #! /usr/bin/python3
 
-import time
 from hydra import *
 
 program = {
@@ -14,6 +13,9 @@ program = {
 	"config"   :None,
 	"error"    :None
 }
+
+class Configuration(BaseConfiguration):
+	pass
 
 class Action1(BaseAction):
 	def validate(self):
@@ -35,9 +37,6 @@ class Action3(BaseAction):
 	
 	def action(self):
 		return "Action 3 Completed Successfully"
-
-class Configuration(BaseConfiguration):
-	pass
 
 class CLI(BaseCLI):
 	def define_arguments(self):

@@ -16,6 +16,16 @@ program = {
 	"error"    :"{path}example.err" # None for no error file
 }
 
+class Configuration(BaseConfiguration):
+	def validate(self):
+		errors = []
+		
+		# TODO - validate your config file
+		
+		if self.conf.get("example", "") == "": errors.append("'example' is required")
+		
+		if errors: raise Exception("The following errors occurred when parsing {}:\n{}".format(self.filename, "\n".join(errors)))
+
 class Action(BaseAction):
 	def standardize(self):
 		# TODO - standardize your inputs
@@ -51,16 +61,6 @@ class Action(BaseAction):
 			self.progress("Record: {}".format(i), started, i, z)
 		
 		return "{} {}!".format(self.inputs["greeting"], self.inputs["name"])
-
-class Configuration(BaseConfiguration):
-	def validate(self):
-		errors = []
-		
-		# TODO - validate your config file
-		
-		if self.conf.get("example", "") == "": errors.append("'example' is required")
-		
-		if errors: raise Exception("The following errors occurred when parsing {}:\n{}".format(self.filename, "\n".join(errors)))
 
 class CLI(BaseCLI):
 	def define_arguments(self):

@@ -1,6 +1,5 @@
 #! /usr/bin/python3
 
-import time
 from hydra import *
 
 program = {
@@ -15,13 +14,12 @@ program = {
 	"error"    :None
 }
 
-class Action(BaseAction):
-	def action(self):
-		return "Completed Successfully"
-
 class Configuration(BaseConfiguration):
 	pass
 
+class Action(BaseAction):
+	def action(self):
+		return "Completed Successfully"
 class CLI(BaseCLI):
 	def get_action(self, inputs):
 		return Action
