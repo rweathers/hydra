@@ -14,6 +14,7 @@ Base class for defining the graphical user interface.
 * `padding` - Padding to use for all widgets.
 * `text_width` - Width of text boxes.
 * `last_update` - Unix timestamp of last user progress update.
+* `initialdirs` - Last directory used for each initialdir passed to create_browse.
 
 ## Functions
 

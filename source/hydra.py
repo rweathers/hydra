@@ -335,6 +335,7 @@ class BaseGUI(tk.Frame):
 		padding - Padding to use for all widgets.
 		text_width - Width of text boxes.
 		last_update - Unix timestamp of last user progress update.
+		initialdirs - Last directory used for each initialdir passed to create_browse.
 	"""
 	
 	def __init__(self, master, prog, conf):
@@ -358,6 +359,7 @@ class BaseGUI(tk.Frame):
 		self.padding = 4
 		self.text_width = 40
 		self.last_update = 0
+		self.initialdirs = {None:os.path.expanduser("~")}
 		
 		self.define_icon()
 		self.define_menu()
@@ -555,7 +557,8 @@ class BaseGUI(tk.Frame):
 		"""
 		self.create_entry(parent, name, text, default=default, largs=largs, wargs=wargs, lgrid=lgrid, wgrid=wgrid)
 		
-		if (initialdir is None) or (initialdir == ""): initialdir = os.path.expanduser("~")
+		if initialdir == "": initialdir = None
+		if initialfile == "": initialfile = None
 		
 		text = "Browse…"
 		value = tk.StringVar()
@@ -849,10 +852,14 @@ class BaseGUI(tk.Frame):
 			initialfile - Starting filename for the file dialog.
 			filetypes - List of allowed file types.
 		"""
-		if widget.value.get() != "": initialdir = os.path.dirname(widget.value.get())
+		initialdir2 = initialdir
+		if widget.value.get() != "": initialdir2 = os.path.dirname(widget.value.get())
+		elif initialdir in self.initialdirs: initialdir2 = self.initialdirs[initialdir]
 		
-		result = tk.filedialog.askopenfilename(initialdir=initialdir, initialfile=initialfile, filetypes=filetypes)
-		if result: widget.setval(result)
+		result = tk.filedialog.askopenfilename(initialdir=initialdir2, initialfile=initialfile, filetypes=filetypes)
+		if result:
+			widget.setval(result)
+			self.initialdirs[initialdir] = os.path.dirname(result)
 		
 		# Hack for windows bug - if you double-click the second click is passed to the form, this sends the event to a disabled widget causing it to have no effect
 		self.disable_widgets()
@@ -867,15 +874,19 @@ class BaseGUI(tk.Frame):
 			initialfile - Starting filename for the file dialog.
 			filetypes - List of allowed file types.
 		"""
-		if widget.value.get() != "": initialdir = os.path.dirname(list(csv.reader([widget.value.get()]))[0][0])
+		initialdir2 = initialdir
+		if widget.value.get() != "": initialdir2 = os.path.dirname(list(csv.reader([widget.value.get()]))[0][0])
+		elif initialdir in self.initialdirs: initialdir2 = self.initialdirs[initialdir]
 				
-		result = tk.filedialog.askopenfilenames(initialdir=initialdir, initialfile=initialfile, filetypes=filetypes)
-		if len(result) == 1:
-			result = result[0]
-		else:
-			result = map(lambda f: "\"{}\"".format(f.replace("\"", "\\\"")), result)
-			result = ",".join(result)
-		widget.setval(result)
+		result = tk.filedialog.askopenfilenames(initialdir=initialdir2, initialfile=initialfile, filetypes=filetypes)
+		if len(result) > 0:
+			self.initialdirs[initialdir] = os.path.dirname(result[0])
+			if len(result) == 1:
+				result = result[0]
+			else:
+				result = map(lambda f: "\"{}\"".format(f.replace("\"", "\\\"")), result)
+				result = ",".join(result)
+			widget.setval(result)
 		
 		# Hack for windows bug - if you double-click the second click is passed to the form, this sends the event to a disabled widget causing it to have no effect
 		self.disable_widgets()
@@ -890,10 +901,14 @@ class BaseGUI(tk.Frame):
 			initialfile - Starting filename for the file dialog.
 			filetypes - List of allowed file types.
 		"""
-		if widget.value.get() != "": initialdir = os.path.dirname(widget.value.get())
+		initialdir2 = initialdir
+		if widget.value.get() != "": initialdir2 = os.path.dirname(widget.value.get())
+		elif initialdir in self.initialdirs: initialdir2 = self.initialdirs[initialdir]
 		
-		result = tk.filedialog.asksaveasfilename(initialdir=initialdir, initialfile=initialfile, filetypes=filetypes)
-		if result: widget.setval(result)
+		result = tk.filedialog.asksaveasfilename(initialdir=initialdir2, initialfile=initialfile, filetypes=filetypes)
+		if result:
+			widget.setval(result)
+			self.initialdirs[initialdir] = os.path.dirname(result)
 	
 	def get_folder(self, widget, initialdir, ignored1=None, ignored2=None):
 		"""Show the open folder dialog.
@@ -904,10 +919,14 @@ class BaseGUI(tk.Frame):
 			ignored1 - Stub paramater just to be compatible with the other file dialog functions.
 			ignored2 - Stub paramater just to be compatible with the other file dialog functions.
 		"""
-		if widget.value.get() != "": initialdir = widget.value.get()
+		initialdir2 = initialdir
+		if widget.value.get() != "": initialdir2 = widget.value.get()
+		elif initialdir in self.initialdirs: initialdir2 = self.initialdirs[initialdir]
 		
-		result = tk.filedialog.askdirectory(initialdir=initialdir)
-		if result: widget.setval(result)
+		result = tk.filedialog.askdirectory(initialdir=initialdir2)
+		if result:
+			widget.setval(result)
+			self.initialdirs[initialdir] = result
 	
 	def center(self, window):
 		"""Center the given window.
