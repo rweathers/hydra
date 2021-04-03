@@ -47,3 +47,11 @@ Added double-click event to entires to open the specified path.
 ## 0.5.1-beta (2021-03-27)
 
 Forced display of the 100% success message in the GUI version.
+
+## 0.6.0-beta (2021-04-03)
+
+Made BaseConfiguration subclass optional.
+
+Made only one of BaseCLI or BaseGUI subclasses required.
+
+Made the file/folder dialogs retain last used folder.
