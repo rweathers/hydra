@@ -1,25 +1,21 @@
 #! /usr/bin/python3
 
+import unittest
 from example import program, Configuration, Action
 
-def test1(inputs):
-	print("Running Test 1 ... ", end="", flush=True)
+class TestAction(unittest.TestCase):
+	@classmethod
+	def setUpClass(cls):
+		cls.conf = Configuration(program).conf
 	
-	inputs.update({"greeting":"Hello", "name":"World"})
-	action = Action(inputs)
-	message = action.execute()
+	def test_validation(self):
+		inputs = {"greeting":"", "name":""}
+		with self.assertRaisesRegex(Exception, "^Greeting required\nName required$"):
+			Action({**self.conf, **inputs}).execute()
 	
-	if message == "Hello World!":
-		print("PASS")
-	else:
-		print("FAIL")
+	def test_greeting(self):
+		inputs = {"greeting":"Hello", "name":"World"}
+		message = Action({**self.conf, **inputs}).execute()
+		self.assertEqual(message, "Hello World!")
 
-def main():
-	try:
-		conf = Configuration(program)
-		test1(conf.conf)
-	except Exception as e:
-		import traceback
-		print("\n\n{}".format(traceback.format_exc()))
-
-if __name__ == "__main__": main()
+if __name__ == '__main__': unittest.main()
