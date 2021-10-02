@@ -80,6 +80,14 @@ _Parameters_:
 
 * `text` - Title text.
 
+### check_widget_name(name)
+
+Raise a KeyError if the given name is already in use.
+
+_Parameters_:
+
+* `name` - Name of the widget.
+
 ### create_entry(parent, name, text, default="", largs={}, wargs={}, lgrid={}, wgrid={})
 
 Add an entry to the given parent.

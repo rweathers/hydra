@@ -497,6 +497,14 @@ class BaseGUI(tk.Frame):
 		label = ttk.Label(self, text=text, padding=(0, 0, 0, 10), font=("Arial", 18, "bold"))
 		label.grid(row=0, column=0, columnspan=self.grid_size()[0])
 	
+	def check_widget_name(self, name):
+		"""Raise a KeyError if the given name is already in use.
+		
+		Parameters:
+			name - Name of the widget.
+		"""
+		if name in self.widgets: raise KeyError("Duplicate widget name: {}".format(name))
+	
 	def create_entry(self, parent, name, text, default="", largs={}, wargs={}, lgrid={}, wgrid={}):
 		"""Add an entry to the given parent.
 		
@@ -510,6 +518,8 @@ class BaseGUI(tk.Frame):
 			lgrid - grid() arguments for the label.
 			wgrid - grid() arguments for the widget.
 		"""
+		self.check_widget_name(name)
+		
 		label = ttk.Label(parent, text=text, **largs)
 		label.grid(**setdefaults(lgrid, {"row":parent.row, "column":0, "padx":self.padding, "pady":self.padding, "sticky":"W"}))
 		
@@ -555,6 +565,8 @@ class BaseGUI(tk.Frame):
 			wgrid - grid() arguments for the widget.
 			bgrid - grid() arguments for the browse button.
 		"""
+		self.check_widget_name(name)
+		
 		self.create_entry(parent, name, text, default=default, largs=largs, wargs=wargs, lgrid=lgrid, wgrid=wgrid)
 		
 		if initialdir == "": initialdir = None
@@ -586,6 +598,8 @@ class BaseGUI(tk.Frame):
 			lgrid - grid() arguments for the label.
 			wgrid - grid() arguments for the widget.
 		"""
+		self.check_widget_name(name)
+		
 		label = ttk.Label(parent, text=text, **largs)
 		label.grid(**setdefaults(lgrid, {"row":parent.row, "column":0, "padx":self.padding, "pady":self.padding, "sticky":"W"}))
 		
@@ -617,6 +631,8 @@ class BaseGUI(tk.Frame):
 			lgrid - grid() arguments for the label.
 			wgrid - grid() arguments for the widget.
 		"""
+		self.check_widget_name(name)
+		
 		label = ttk.Label(parent, text=text, **largs)
 		label.grid(**setdefaults(lgrid, {"row":parent.row, "column":0, "padx":self.padding, "pady":self.padding, "sticky":"NW"}))
 		
@@ -661,6 +677,8 @@ class BaseGUI(tk.Frame):
 			lgrid - grid() arguments for the label.
 			wgrid - grid() arguments for the widget.
 		"""
+		self.check_widget_name(name)
+		
 		label = ttk.Label(parent, text=text, **largs)
 		label.grid(**setdefaults(lgrid, {"row":parent.row, "column":0, "padx":self.padding, "pady":self.padding, "sticky":"NW"}))
 		
@@ -707,6 +725,8 @@ class BaseGUI(tk.Frame):
 			wargs - Constructor arguments for the widget.
 			wgrid - grid() arguments for the widget.
 		"""
+		self.check_widget_name(name)
+		
 		value = tk.IntVar()
 		checkbox = ttk.Checkbutton(parent, variable=value, text=text, **wargs)
 		checkbox.value = value
@@ -730,6 +750,8 @@ class BaseGUI(tk.Frame):
 			bargs - Constructor arguments for the button.
 			bgrid - grid() arguments for the button.
 		"""
+		self.check_widget_name(name)
+		
 		value = tk.StringVar()
 		value.set(text)
 		button = ttk.Button(parent, textvariable=value, command=command, **bargs)
@@ -750,6 +772,8 @@ class BaseGUI(tk.Frame):
 			name - Name of the widget.
 			nargs - Constructor arguments for the notebook.
 		"""
+		self.check_widget_name(name)
+		
 		value = tk.StringVar()
 		value.set("")
 		notebook = ttk.Notebook(parent, **nargs)
