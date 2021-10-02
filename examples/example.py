@@ -24,7 +24,7 @@ class Configuration(BaseConfiguration):
 		
 		if self.conf.get("example", "") == "": errors.append("'example' is required")
 		
-		if errors: raise Exception("The following errors occurred when parsing {}:\n{}".format(self.filename, "\n".join(errors)))
+		if errors: raise ValueError("The following errors occurred when parsing {}:\n{}".format(self.filename, "\n".join(errors)))
 
 class Action(BaseAction):
 	def standardize(self):
@@ -42,7 +42,7 @@ class Action(BaseAction):
 		if self.inputs["greeting"] == "": errors.append("Greeting required")
 		if self.inputs["name"]     == "": errors.append("Name required")
 		
-		if errors: raise Exception("\n".join(errors))
+		if errors: raise ValueError("\n".join(errors))
 	
 	def action(self):
 		# TODO - perform the task

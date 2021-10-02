@@ -61,11 +61,7 @@ class BaseConfiguration:
 	
 	def load(self):
 		"""Load the configuration file into self.conf."""
-		try:
-			open(self.filename, "r").close()
-		except Exception as e:
-			raise Exception("{} not found".format(self.filename))
-		
+		open(self.filename, "r").close()
 		cp = configparser.ConfigParser()
 		cp.read(self.filename)
 		for s in cp.sections():
@@ -143,7 +139,7 @@ class BaseCLI:
 				flags[long] = [] if defaults.get(long, "") == "" else [defaults.get(long, "")]
 				multiple.append(long)
 			else:
-				raise Exception("Invalid argument type: {}".format(type))
+				raise ValueError("Invalid argument type: {}".format(type))
 		
 		# Convert all flags to their long version
 		long_args = []
@@ -165,7 +161,7 @@ class BaseCLI:
 					if extra is not None: long_args.append(extra)
 					count += 1
 				else:
-					raise Exception("Unknown argument: {}".format(val))
+					raise ValueError("Unknown argument: {}".format(val))
 			elif val.startswith("-"):
 				# Split and convert short flags
 				i = 1
@@ -177,7 +173,7 @@ class BaseCLI:
 						long_args.append("--{}".format(map[f]))
 						count += 1
 					else:
-						raise Exception("Unknown argument: {}".format(f))
+						raise ValueError("Unknown argument: {}".format(f))
 						
 					i+=1
 			else:
@@ -308,7 +304,7 @@ class BaseCLI:
 				try:
 					action = action(self.inputs, self.output_progress)
 				except TypeError as e:
-					raise Exception("{}.get_action must return a subclass of BaseAction, received: {}".format(self.__class__.__name__, action))
+					raise TypeError("{}.get_action must return a subclass of BaseAction, received: {}".format(self.__class__.__name__, action))
 				message = action.execute()
 				
 				if not self.inputs["quiet"]:
@@ -999,7 +995,7 @@ class BaseGUI(tk.Frame):
 			try:
 				action = action(inputs, self.set_progress)
 			except TypeError as e:
-				raise Exception("{}.get_action must return a subclass of BaseAction, received: {}".format(self.__class__.__name__, action))
+				raise TypeError("{}.get_action must return a subclass of BaseAction, received: {}".format(self.__class__.__name__, action))
 			message = action.execute()
 			
 			self.config(cursor="")
@@ -1077,7 +1073,7 @@ class BaseAction:
 		if self.inputs.get("verbose", False): self.progress("Opening {}\n".format(filename))
 		
 		if filename == "STDIN":
-			if (sys.stdin is not None) and sys.stdin.isatty(): raise Exception("Empty STDIN")
+			if (sys.stdin is not None) and sys.stdin.isatty(): raise IOError("Empty STDIN")
 			return sys.stdin
 		elif filename == "STDOUT":
 			return sys.stdout

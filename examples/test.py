@@ -10,7 +10,7 @@ class TestAction(unittest.TestCase):
 	
 	def test_validation(self):
 		inputs = {"greeting":"", "name":""}
-		with self.assertRaisesRegex(Exception, "^Greeting required\nName required$"):
+		with self.assertRaisesRegex(ValueError, "^Greeting required\nName required$"):
 			Action({**self.conf, **inputs}).execute()
 	
 	def test_greeting(self):
