@@ -304,7 +304,11 @@ class BaseCLI:
 			else:
 				if not self.inputs["quiet"]: print("")
 				
-				action = self.get_action(self.inputs)(self.inputs, self.output_progress)
+				action = self.get_action(self.inputs)
+				try:
+					action = action(self.inputs, self.output_progress)
+				except TypeError as e:
+					raise Exception("{}.get_action must return a subclass of BaseAction, received: {}".format(self.__class__.__name__, action))
 				message = action.execute()
 				
 				if not self.inputs["quiet"]:
@@ -991,7 +995,11 @@ class BaseGUI(tk.Frame):
 			inputs = self.conf.copy()
 			for name in self.widgets: inputs[name] = self.widgets[name].getval()
 			
-			action = self.get_action(inputs)(inputs, self.set_progress)
+			action = self.get_action(inputs)
+			try:
+				action = action(inputs, self.set_progress)
+			except TypeError as e:
+				raise Exception("{}.get_action must return a subclass of BaseAction, received: {}".format(self.__class__.__name__, action))
 			message = action.execute()
 			
 			self.config(cursor="")
