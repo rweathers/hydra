@@ -1,15 +1,15 @@
 from setuptools import setup
 
 setup(
-	name="hydra",
-	version="0.6.0-beta",
+	name="hydra-ui",
+	version="1.0.0rc1",
 	description="A framework for developing hybrid CLI/GUI programs.",
 	url="https://github.com/rweathers/hydra",
 	author="Ryan Weathers",
 	author_email="ryanweathers63@gmail.com",
 	license="GPLv3+",
 	classifiers=[
-		"Development Status :: 4 - Beta",
+		"Development Status :: 5 - Production/Stable",
 		"Intended Audience :: Developers",
 		"Topic :: Software Development :: Libraries :: Application Frameworks",
 		"License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",

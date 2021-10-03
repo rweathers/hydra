@@ -18,7 +18,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-# Version: 0.6.0-beta (2021-04-03)
+# Version: 1.0.0rc1 (2021-10-03)
 ################################################################################
 
 import csv

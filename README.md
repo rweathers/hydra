@@ -6,7 +6,9 @@ Hydra is a framework for developing hybrid CLI/GUI programs in Python. It is a l
 
 Download the latest wheel from the [release](release) folder and install with PIP:
 
-```pip install hydra-0.6.0b0-py3-none-any.whl```
+```pip install hydra_ui-1.0.0rc1-py3-none-any.whl```
+
+If you are upgrading from a previous version, do so one release at a time and read the [change log](CHANGELOG).
 
 ## Usage
 

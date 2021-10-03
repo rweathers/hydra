@@ -55,3 +55,11 @@ Made BaseConfiguration subclass optional.
 Made only one of BaseCLI or BaseGUI subclasses required.
 
 Made the file/folder dialogs retain last used folder.
+
+## 1.0.0rc1 (2021-10-03)
+
+Added error checking for invalid return values from get_action.
+
+Added error checking for duplicate widget names.
+
+Renamed the package (not the module). If upgrading uninstall the existing package first.
