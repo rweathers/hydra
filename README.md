@@ -8,7 +8,7 @@ Download the latest wheel from the [release](release) folder and install with PI
 
 ```pip install hydra_ui-1.0.0rc1-py3-none-any.whl```
 
-If you are upgrading from a previous version, do so one release at a time and read the [change log](CHANGELOG).
+If you are upgrading from a previous version, do so one release at a time and read the [change log](CHANGELOG.md).
 
 ## Usage
 
