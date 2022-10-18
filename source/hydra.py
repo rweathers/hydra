@@ -884,10 +884,6 @@ class BaseGUI(tk.Frame):
 		if result:
 			widget.setval(result)
 			self.initialdirs[initialdir] = os.path.dirname(result)
-		
-		# Hack for windows bug - if you double-click the second click is passed to the form, this sends the event to a disabled widget causing it to have no effect
-		self.disable_widgets()
-		self.enable_widgets()
 	
 	def get_inputs(self, widget, initialdir, initialfile, filetypes):
 		"""Show the open files (plural) dialog.
@@ -911,10 +907,6 @@ class BaseGUI(tk.Frame):
 				result = map(lambda f: "\"{}\"".format(f.replace("\"", "\\\"")), result)
 				result = ",".join(result)
 			widget.setval(result)
-		
-		# Hack for windows bug - if you double-click the second click is passed to the form, this sends the event to a disabled widget causing it to have no effect
-		self.disable_widgets()
-		self.enable_widgets()
 	
 	def get_output(self, widget, initialdir, initialfile, filetypes):
 		"""Show the save file dialog.
