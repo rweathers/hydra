@@ -63,3 +63,7 @@ Added error checking for invalid return values from get_action.
 Added error checking for duplicate widget names.
 
 Renamed the package (not the module). If upgrading uninstall the existing package first.
+
+## 1.0.0rc2 (2022-10-18)
+
+Removed workaround for old Windows bug.

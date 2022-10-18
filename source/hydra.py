@@ -3,7 +3,7 @@
 ################################################################################
 # Hydra Framework
 #
-# Copyright © 2017, 2018, 2019, 2020, 2021 Ryan Weathers, All Rights Reserved.
+# Copyright © 2017, 2018, 2019, 2020, 2021, 2022 Ryan Weathers, All Rights Reserved.
 # 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-# Version: 1.0.0rc1 (2021-10-03)
+# Version: 1.0.0rc2 (2022-10-18)
 ################################################################################
 
 import csv
