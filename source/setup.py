@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
 	name="hydra-ui",
-	version="1.0.0rc2",
+	version="1.0.0",
 	description="A framework for developing hybrid CLI/GUI programs.",
 	url="https://github.com/rweathers/hydra",
 	author="Ryan Weathers",

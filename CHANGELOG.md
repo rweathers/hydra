@@ -67,3 +67,7 @@ Renamed the package (not the module). If upgrading uninstall the existing packag
 ## 1.0.0rc2 (2022-10-18)
 
 Removed workaround for old Windows bug.
+
+## 1.0.0 (2024-02-16)
+
+No changes from RC2.
