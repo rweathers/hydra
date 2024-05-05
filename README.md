@@ -10,7 +10,7 @@ Install latest version with PIP:
 
 Or, download the latest wheel from the [release](release) folder and install with PIP:
 
-```pip install hydra_ui-1.0.0-py3-none-any.whl```
+```pip install hydra_ui-1.1.0-py3-none-any.whl```
 
 NOTE: If you are upgrading from a previous version, do so one release at a time and read the [change log](CHANGELOG.md).
 

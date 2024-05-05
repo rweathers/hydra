@@ -71,3 +71,8 @@ Removed workaround for old Windows bug.
 ## 1.0.0 (2024-02-16)
 
 No changes from RC2.
+
+## 1.1.0 (2024-05-05)
+
+Added user message and input callbacks to Action.
+Added interface field to Action to identify if the program is running as a gui or cli.

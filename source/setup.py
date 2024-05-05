@@ -2,8 +2,10 @@ from setuptools import setup
 
 setup(
 	name="hydra-ui",
-	version="1.0.0",
+	version="1.1.0",
 	description="A framework for developing hybrid CLI/GUI programs.",
+	long_description="Hydra is a framework for developing hybrid CLI/GUI programs in Python. It is a lightweight wrapper around Tk and is pure Python, with no external dependencies.",
+	long_description_content_type="text/x-rst",
 	url="https://github.com/rweathers/hydra",
 	author="Ryan Weathers",
 	author_email="ryanweathers63@gmail.com",
