@@ -6,10 +6,16 @@ Base class for defining actions.
 
 * `inputs` - User input dictionary.
 * `progress` - Callback function for user progress updates.
+* `user_message` - Callback function for user messages.
+* `user_warning` - Callback function for user warnings.
+* `user_error` - Callback function for user errors.
+* `user_confirm` - Callback function for user confirmations.
+* `user_input` - Callback function for user input.
+* `interface` - Defines the interface used to execute the action.
 
 ## Functions
 
-### BaseAction(inputs, progress=None)
+### BaseAction(inputs, progress=None, user_message=None, user_warning=None, user_error=None, user_confirm=None, user_input=None, interface=None)
 
 Initialize the object.
 
@@ -17,6 +23,12 @@ _Parameters_:
 
 * `inputs` - User input dictionary.
 * `progress` - Callback function for user progress updates.
+* `user_message` - Callback function for user messages.
+* `user_warning` - Callback function for user warnings.
+* `user_error` - Callback function for user errors.
+* `user_confirm` - Callback function for user confirmations.
+* `user_input` - Callback function for user input.
+* `interface` - Defines the interface used to execute the action.
 
 ### standardize()
 

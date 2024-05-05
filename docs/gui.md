@@ -338,6 +338,48 @@ _Parameters_:
 * `processed` - Counter of processed items.
 * `total` - Total number of items to process.
 
+### user_message(message)
+
+Show a message to the user.
+
+_Paramaters_:
+
+* `message` - Message text.
+
+### user_warning(message)
+
+Show a warning message to the user.
+
+_Paramaters_:
+
+* `message` - Message text.
+
+### user_error(message)
+
+Show an error message to the user.
+
+_Paramaters_:
+
+* `message` - Message text.
+
+### user_confirm(message, include_cancel=False)
+
+Ask the user for confirmation and return True, False or None.
+
+_Paramaters_:
+
+* `message` - Message text.
+* `include_cancel` - Flag to enable the cancel option.
+
+### user_input(message, default="")
+
+Ask the user for a value and return it.
+
+_Paramaters_:
+
+* `message` - Message text.
+* `default` - A default value.
+
 ### get_action(inputs)
 
 Return the BaseAction subclass to use.

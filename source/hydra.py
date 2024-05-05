@@ -280,6 +280,63 @@ class BaseCLI:
 				self.last_update = p[0]
 				print(p[1].ljust(self.twidth)[0:self.twidth], end="\r", flush=True)
 	
+	def user_message(self, message):
+		"""Show a message to the user.
+		
+		Paramaters:
+			message - Message text.
+		"""
+		print(message)
+		_ = input("Press enter to continue...")
+		
+	def user_warning(self, message):
+		"""Show a warning message to the user.
+		
+		Paramaters:
+			message - Message text.
+		"""
+		print("WARNING:", message)
+		_ = input("Press enter to continue...")
+		
+	def user_error(self, message):
+		"""Show an error message to the user.
+		
+		Paramaters:
+			message - Message text.
+		"""
+		print("ERROR:", message)
+		_ = input("Press enter to continue...")
+	
+	def user_confirm(self, message, include_cancel=False):
+		"""Ask the user for confirmation and return True, False or None.
+		
+		Paramaters:
+			message - Message text.
+			include_cancel - Flag to enable the cancel option.
+		"""
+		if include_cancel: message += " ([y]es/[n]o/[c]ancel): "
+		else: message += " ([y]es/[n]o): "
+		
+		while True:
+			response = input(message)
+			if response[0:1].lower() == "y": return True
+			elif response[0:1].lower() == "n": return False
+			elif (response[0:1].lower() == "c") and include_cancel: return None
+	
+	def user_input(self, message, default=""):
+		"""Ask the user for a value and return it.
+		
+		Paramaters:
+			message - Message text.
+			default - A default value.
+		"""
+		if default == "": message = "{}: ".format(message)
+		else: message = "{} [default={}]: ".format(message, default)
+		
+		response = input(message)
+		if (response == "") and (default != ""): response = default
+		return response
+	
 	def get_action(self, inputs):
 		"""Return the BaseAction subclass to use.
 		
@@ -302,7 +359,7 @@ class BaseCLI:
 				
 				action = self.get_action(self.inputs)
 				try:
-					action = action(self.inputs, self.output_progress)
+					action = action(self.inputs, self.output_progress, self.user_message, self.user_warning, self.user_error, self.user_confirm, self.user_input, "cli")
 				except TypeError as e:
 					raise TypeError("{}.get_action must return a subclass of BaseAction, received: {}".format(self.__class__.__name__, action))
 				message = action.execute()
@@ -320,6 +377,16 @@ class BaseCLI:
 				print(traceback.format_exc())
 			
 			error_output(e, self.prog["error"])
+
+class InputDialog(tk.simpledialog._QueryString):
+	"""Dialog with only an Ok button."""
+	def buttonbox(self):
+		box = tk.Frame(self)
+		w = tk.Button(box, text="OK", width=10, command=self.ok, default=tk.ACTIVE)
+		w.pack(side=tk.LEFT, padx=5, pady=5)
+		self.bind("<Return>", self.ok)
+		self.bind("<Escape>", self.cancel)
+		box.pack()
 
 class BaseGUI(tk.Frame):
 	"""Base class for defining the graphical user interface.
@@ -990,6 +1057,51 @@ class BaseGUI(tk.Frame):
 			self.widgets["progress"].setval(p[1])
 			self.update()
 	
+	def user_message(self, message):
+		"""Show a message to the user.
+		
+		Paramaters:
+			message - Message text.
+		"""
+		tk.messagebox.showinfo("Information", message)
+	
+	def user_warning(self, message):
+		"""Show a warning message to the user.
+		
+		Paramaters:
+			message - Message text.
+		"""
+		tk.messagebox.showwarning("Warning", message)
+		
+	def user_error(self, message):
+		"""Show an error message to the user.
+		
+		Paramaters:
+			message - Message text.
+		"""
+		tk.messagebox.showerror("Error", message)
+	
+	def user_confirm(self, message, include_cancel=False):
+		"""Ask the user for confirmation and return True, False or None.
+		
+		Paramaters:
+			message - Message text.
+			include_cancel - Flag to enable the cancel option.
+		"""
+		if include_cancel: return tk.messagebox.askyesnocancel("Confirm", message)
+		else: return tk.messagebox.askyesno("Confirm", message)	
+	
+	def user_input(self, message, default=""):
+		"""Ask the user for a value and return it.
+		
+		Paramaters:
+			message - Message text.
+			default - A default value.
+		"""
+		while True:
+			response = InputDialog("Input", message, initialvalue=default, parent=self).result
+			if response is not None: return response
+	
 	def get_action(self, inputs):
 		"""Return the BaseAction subclass to use.
 		
@@ -1009,7 +1121,7 @@ class BaseGUI(tk.Frame):
 			
 			action = self.get_action(inputs)
 			try:
-				action = action(inputs, self.set_progress)
+				action = action(inputs, self.set_progress, self.user_message, self.user_warning, self.user_error, self.user_confirm, self.user_input, "gui")
 			except TypeError as e:
 				raise TypeError("{}.get_action must return a subclass of BaseAction, received: {}".format(self.__class__.__name__, action))
 			message = action.execute()
@@ -1033,17 +1145,35 @@ class BaseAction:
 	Attributes:
 		inputs - User input dictionary.
 		progress - Callback function for user progress updates.
+		user_message - Callback function for user messages.
+		user_warning - Callback function for user warnings.
+		user_error - Callback function for user errors.
+		user_confirm - Callback function for user confirmations.
+		user_input - Callback function for user input.
+		interface - Defines the interface used to execute the action.
 	"""
 	
-	def __init__(self, inputs, progress=None):
+	def __init__(self, inputs, progress=None, user_message=None, user_warning=None, user_error=None, user_confirm=None, user_input=None, interface=None):
 		"""Initialize the object.
 		
 		Parameters:
 			inputs - User input dictionary.
 			progress - Callback function for user progress updates.
+			user_message - Callback function for user messages.
+			user_warning - Callback function for user warnings.
+			user_error - Callback function for user errors.
+			user_confirm - Callback function for user confirmations.
+			user_input - Callback function for user input.
+			interface - Defines the interface used to execute the action.
 		"""
 		self.inputs = inputs
 		self.progress = progress if progress is not None else lambda *_: None
+		self.user_message = user_message if user_message is not None else lambda *_: None
+		self.user_warning = user_warning if user_warning is not None else lambda *_: None
+		self.user_error = user_error if user_error is not None else lambda *_: None
+		self.user_confirm = user_confirm if user_confirm is not None else lambda *_: None
+		self.user_input = user_input if user_input is not None else lambda *_: None
+		self.interface = interface
 	
 	def standardize(self):
 		"""Standardize the user's inputs."""
